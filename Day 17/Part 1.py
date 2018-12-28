@@ -101,8 +101,6 @@ def madness(path):
     soil.flow(500, 0)
     # soil.draw()
     # print(soil)
-    with open('result1.txt', 'w') as f:
-        f.write(str(soil))
     return sum(1 for ((x, y), val) in soil.grid.items() if val in '~|' and soil.min_y <= y < soil.max_y)
 
 
