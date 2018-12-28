@@ -1,7 +1,8 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 import functools
 from collections import namedtuple, deque
 import networkx as nx
+
 
 @functools.lru_cache(maxsize=None)
 def get_index(pos, target, depth):
@@ -56,10 +57,7 @@ def dijkstra(source, dest,  target, depth, margin=100):
                             end = end_x, end_y, start_tool
                             graph.add_edge(start, end, weight=1)
 
-
-
     return nx.shortest_path_length(graph, source, dest, 'weight')
-
 
 
 def madness(depth, target):

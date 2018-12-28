@@ -1,4 +1,5 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
+
 
 def distance(str1, str2):
     dist = 0
@@ -18,5 +19,5 @@ def find_box(path):
                 return ''.join([a for a, b in zip(b1, b2) if a == b])
 
 
-assert(find_box('Day 2/example.2.txt') == 'fgij')
-print(find_box('Day 2/input.txt'))
+assert find_box('Day 02/example.2.txt') == 'fgij'
+print(find_box('Day 02/input.txt'))

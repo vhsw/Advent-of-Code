@@ -1,4 +1,5 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
+
 
 def step(area):
     mem = area.copy()
@@ -69,9 +70,8 @@ def madness(path):
             else:
                 cache.add(frozen_area)
 
-    
     period = len(results)
-    end = (last_step - repeat_pos)%period -2
+    end = (last_step - repeat_pos) % period - 2
     print('per', last_step, repeat_pos, period, end)
     return results[end]
 

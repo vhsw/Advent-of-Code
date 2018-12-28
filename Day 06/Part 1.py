@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 
 import string
 
@@ -51,9 +51,9 @@ class Grid:
             if i != '.':
                 self.corners.append(i)
         for i in [j[-1] for j in self.grid]:
-            if i != '.': 
+            if i != '.':
                 self.corners.append(i)
-        
+
         print(self.corners)
 
     def max_area(self):
@@ -70,24 +70,25 @@ class Grid:
     def plot(self):
         import matplotlib.pyplot as plt
         import numpy as np
-        grid = np.zeros((len(self.grid),len(self.grid[0]))) 
+        grid = np.zeros((len(self.grid), len(self.grid[0])))
         for i in range(len(self.grid)):
             for j in range(len(self.grid[0])):
                 if self.grid[i][j] == '.':
                     grid[i][j] = 100
-                else:    
+                else:
                     grid[i][j] = string.ascii_letters.index(self.grid[i][j])
         plt.imshow(grid)
         plt.show()
+
 
 def area(path):
     with open(path) as f:
         raw = list(f.read().splitlines())
     data = [Point.from_str(line) for line in raw]
     grid = Grid(data)
-    #grid.plot()
+    # grid.plot()
     return grid.max_area()
 
 
-#assert(area('Day 6/example.txt') == 17)
-print(area('Day 6/input.txt'))
+#assert area('Day 06/example.txt') == 17
+print(area('Day 06/input.txt'))

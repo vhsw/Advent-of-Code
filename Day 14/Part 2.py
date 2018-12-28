@@ -4,7 +4,7 @@
 def scores(target):
     target = list(map(int, target))
     recipes = [3, 7]
-    current = (0,1)
+    current = (0, 1)
 
     while True:
         recipes_sum = sum(recipes[c] for c in current)
@@ -13,9 +13,8 @@ def scores(target):
             recipes.append(new_recipet)
             if target == recipes[-len(target):]:
                 return len(recipes) - len(target)
-        current  = tuple((c + recipes[c]+1) % len(recipes) for c in current)
+        current = tuple((c + recipes[c]+1) % len(recipes) for c in current)
 
-        
 
 assert scores('01245') == 5
 assert scores('51589') == 9

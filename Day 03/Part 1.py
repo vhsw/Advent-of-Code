@@ -1,4 +1,5 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
+
 
 class Claim:
     def __init__(self, claim_str):
@@ -29,5 +30,6 @@ def overlaps(path):
 
     return overlap_area
 
-assert(overlaps('Day 3/example.txt') == 4)
-print(overlaps('Day 3/input.txt'))
+
+assert overlaps('Day 03/example.txt') == 4
+print(overlaps('Day 03/input.txt'))

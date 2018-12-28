@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 
 
 class Tree:
@@ -25,11 +25,10 @@ class Tree:
             for i in self.meta:
                 i -= 1
                 if 0 <= i < len(self.child):
-                    res+=self.child[i].checksum()
+                    res += self.child[i].checksum()
             return res
         else:
             return sum(self.meta)
-
 
     def __repr__(self):
         return f'Tree child: {self.child}, meta: {self.meta}'
@@ -42,5 +41,5 @@ def puzzle(path):
     return root.checksum()
 
 
-assert(puzzle('Day 8/example.txt') == 66)
-print(puzzle('Day 8/input.txt'))
+assert puzzle('Day 08/example.txt') == 66
+print(puzzle('Day 08/input.txt'))

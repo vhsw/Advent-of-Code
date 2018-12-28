@@ -1,4 +1,5 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
+
 
 def checksum(path):
     num_2 = 0
@@ -17,5 +18,6 @@ def checksum(path):
                     was_3 = True
     return num_2 * num_3
 
-assert(checksum('Day 2/example.1.txt') == 12)
-print(checksum('Day 2/input.txt'))
+
+assert checksum('Day 02/example.1.txt') == 12
+print(checksum('Day 02/input.txt'))

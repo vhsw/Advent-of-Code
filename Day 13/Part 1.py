@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 
 
 class Cart:
@@ -123,13 +123,13 @@ def madness(path):
     with open(path) as f:
         raw_data = f.read().splitlines()
     board = Board(raw_data)
-    #print(board)
+    
     crash = None
     while not crash:
         crash = board.step()
-        print(board)
-        import time
-        time.sleep(.1)
+        # print(board)
+        # import time
+        # time.sleep(.1)
     return crash[1], crash[0]
 
 

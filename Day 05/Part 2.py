@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 import string
 
 
@@ -24,5 +24,5 @@ def shortest_polymer(path):
     return min(res.values())
 
 
-assert(shortest_polymer('Day 5/example.txt') == 4)
-print(shortest_polymer('Day 5/input.txt'))
+assert shortest_polymer('Day 05/example.txt') == 4
+print(shortest_polymer('Day 05/input.txt'))

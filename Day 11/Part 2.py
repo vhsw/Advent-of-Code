@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 
 
 def power(x, y, serial):
@@ -39,7 +39,7 @@ def largest_total_power(grid):
     powers = {}
     for size in range(1, 300):
         max_cell, val = largest_power_cell(grid, size)
-        print(size, val)
+
         # dirty!
         if val < 0:
             break
@@ -50,10 +50,11 @@ def largest_total_power(grid):
 
 
 grid = create_grid(18)
-assert(largest_power_cell(grid, 3) == ((33, 45), 29))
-assert(largest_total_power(grid) == (90, 269, 16))
-grid = create_grid(42)
-assert(largest_total_power(grid) == (232, 251, 12))
-grid = create_grid(5093)
+assert largest_power_cell(grid, 3) == ((33, 45), 29)
+assert largest_total_power(grid) == (90, 269, 16)
 
+grid = create_grid(42)
+assert largest_total_power(grid) == (232, 251, 12)
+
+grid = create_grid(5093)
 print(largest_total_power(grid))

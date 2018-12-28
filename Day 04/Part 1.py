@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 
 
 def asleep_guards(path):
@@ -32,5 +32,5 @@ def asleep_guards(path):
     return best_sleeper_id * most_asleep_minute
 
 
-assert(asleep_guards('Day 4/example.txt') == 240)
-print(asleep_guards('Day 4/input.txt'))
+assert asleep_guards('Day 04/example.txt') == 240
+print(asleep_guards('Day 04/input.txt'))

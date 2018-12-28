@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 
 
 class Rule:
@@ -15,11 +15,8 @@ def plants(path):
         raw_data = f.read().splitlines()
     init_state = list(raw_data[0][15:])
     rules = tuple(map(Rule, raw_data[2:]))
-    state_str = ''.join(init_state)
-    width = 80
-    print(' 0', state_str.center(width))
     state_pad = 0
-    for gen in range(20):
+    for _ in range(20):
         while init_state[:5] != ['.']*5:
             init_state.insert(0, '.')
             state_pad += 1
@@ -36,8 +33,6 @@ def plants(path):
             else:
                 state.append('.')            
         state.extend(init_state[-3:])
-        state_str = ''.join(state)
-        print(f'{gen + 1:2d}', state_str.center(width))
         init_state = state
     total = 0
     for i, p in enumerate(init_state):

@@ -45,5 +45,5 @@ def task(path):
     return ''.join(tree.done)
 
 
-assert(task('Day 7/example.txt') == 'CABDFE')
-print(task('Day 7/input.txt'))
+assert task('Day 07/example.txt') == 'CABDFE'
+print(task('Day 07/input.txt'))

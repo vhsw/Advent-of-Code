@@ -66,5 +66,5 @@ def task(path, n_workers, duration):
     return time -1
 
 
-assert(task('Day 7/example.txt', 2, 0) == 15)
-print(task('Day 7/input.txt', 5, 60))
+assert task('Day 07/example.txt', 2, 0) == 15
+print(task('Day 07/input.txt', 5, 60))
