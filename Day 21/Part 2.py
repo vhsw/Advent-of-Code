@@ -143,7 +143,7 @@ class Machine:
 def madness(path):
     with open(path) as f:
         raw_data = f.read().splitlines()
-    ip_reg_str, *program = raw_data
+    ip_reg_str, program = raw_data[0], raw_data[1:]
     ip_reg = int(ip_reg_str[4:])
     m = Machine([1, 0, 0, 0, 0, 0])
     
