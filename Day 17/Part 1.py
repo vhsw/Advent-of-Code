@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 import sys
 sys.setrecursionlimit(1500)
 
@@ -103,10 +103,8 @@ def madness(path):
     # print(soil)
     with open('result1.txt', 'w') as f:
         f.write(str(soil))
-    return sum(1 for ((x, y),val) in soil.grid.items() if val in '~|' and soil.min_y <= y < soil.max_y) 
+    return sum(1 for ((x, y), val) in soil.grid.items() if val in '~|' and soil.min_y <= y < soil.max_y)
 
 
-# print(madness('Day 17/example.0.txt'))
-# assert madness('Day 17/example.0.txt') == 57
-# assert madness('Day 15/example.1.txt') == (7, 3)
+assert madness('Day 17/example.0.txt') == 57
 print(madness('Day 17/input.txt'))

@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 
 
 def power(x, y, serial):
@@ -25,12 +25,12 @@ def largest_total_power(serial):
             res += sum(grid[i+1][j:j+3])
             res += sum(grid[i+2][j:j+3])
             powers[(i,j)] = res
-    pos, val = max(powers.items(), key=lambda i: i[1])
+    pos, _ = max(powers.items(), key=lambda i: i[1])
     return pos
 
-assert(power(3, 5, 8) == 4)
-assert(power(122, 79, 57) == -5)
-assert(power(217, 196, 39) == 0)
-assert(power(101, 153, 71) == 4)
-assert(largest_total_power(18) == (33,45))
+assert power(3, 5, 8) == 4
+assert power(122, 79, 57) == -5
+assert power(217, 196, 39) == 0
+assert power(101, 153, 71) == 4
+assert largest_total_power(18) == (33,45)
 print(largest_total_power(5093))

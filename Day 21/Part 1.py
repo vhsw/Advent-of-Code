@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 
 
 class Machine:
@@ -148,7 +148,7 @@ def madness(path, r0):
         instr = program[m.reg[ip_reg]]
         func, *args = instr.split()
         getattr(m, func)(*map(int, args))
-        if m.reg[ip_reg] +1 < len(program):
+        if m.reg[ip_reg] + 1 < len(program):
             m.reg[ip_reg] += 1
         else:
             return i
@@ -157,9 +157,8 @@ def madness(path, r0):
 
 min_res = float('inf')
 for i in range(2000):
-    result = madness('Day 19/input.txt', i) 
+    result = madness('Day 19/input.txt', i)
     if result != -1:
         if result < min_res:
-            min_res = res
+            min_res = result
             print(i, result, min_res)
-

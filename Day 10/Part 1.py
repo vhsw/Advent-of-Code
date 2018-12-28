@@ -1,11 +1,11 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 import re
 import pprint
 
 
 class Point:
     def __init__(self, data):
-        regex = 'position=<([ -]*\d+), ([ -]*\d+)> velocity=<([ -]*\d+), ([ -]*\d+)>'
+        regex = r'position=<([ -]*\d+), ([ -]*\d+)> velocity=<([ -]*\d+), ([ -]*\d+)>'
         matches = re.match(regex, data)
         self.x, self.y, self.dx, self.dy = map(int, matches.groups())
 
@@ -36,15 +36,14 @@ class Canvas:
         pprint.pprint([''.join(line) for line in canvas])
 
 
-def message(path):
+def message(path, step):
     with open(path) as f:
         raw_data = f.read().splitlines()
     points = [Point(line) for line in raw_data]
     canvas = Canvas(points)
-    # canvas.draw(3)
-    canvas.draw(10418)
+    canvas.draw(step)
     return 0
 
 
-# message('Day 10/example.txt')
-message('Day 10/input.txt')
+message('Day 10/example.txt', 3)
+message('Day 10/input.txt', 10418)

@@ -1,4 +1,5 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
+
 
 class Claim:
     def __init__(self, claim_str):
@@ -25,7 +26,7 @@ def no_overlaps(path):
                 else:
                     canvas[x][y] = -1
     #import pprint
-    #pprint.pprint(canvas)
+    # pprint.pprint(canvas)
     for c in claims:
         area = 0
         for x in range(c.x, c.x + c.w):
@@ -36,5 +37,6 @@ def no_overlaps(path):
         if area == c.w * c.h:
             return c.id
 
-assert(no_overlaps('Day 3/example.txt') == 3)
-print(no_overlaps('Day 3/input.txt'))
+
+assert no_overlaps('Day 03/example.txt') == 3
+print(no_overlaps('Day 03/input.txt'))

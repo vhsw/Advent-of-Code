@@ -1,4 +1,5 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
+
 
 def get_first_repeat(path):
     freq = 0
@@ -12,5 +13,7 @@ def get_first_repeat(path):
             else:
                 history.add(freq)
                 freq += i
-assert(get_first_repeat('Day 1/example.txt') == 0)
-print(get_first_repeat('Day 1/input.txt'))
+
+
+assert get_first_repeat('Day 01/example.txt') == 0
+print(get_first_repeat('Day 01/input.txt'))

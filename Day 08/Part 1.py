@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 
 
 class Tree:
@@ -36,5 +36,5 @@ def puzzle(path):
     return root.checksum()
 
 
-assert(puzzle('Day 8/example.txt') == 138)
-print(puzzle('Day 8/input.txt'))
+assert puzzle('Day 08/example.txt') == 138
+print(puzzle('Day 08/input.txt'))

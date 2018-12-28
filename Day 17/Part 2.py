@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 import sys
 sys.setrecursionlimit(1500)
 
@@ -35,7 +35,7 @@ class Soil:
             res.append(''.join(row))
         return '\n'.join(res) + '\n'
 
-    def draw(self, x_lim=None, y_lim = None):
+    def draw(self, x_lim=None, y_lim=None):
         import matplotlib.pyplot as plt
         d = {'#': 0, '|': 50, '~': 100, '.': 255}
         res = []
@@ -100,9 +100,9 @@ def madness(path):
         raw_data = f.read().splitlines()
     soil = Soil(raw_data)
     soil.flow(500, 0)
-    soil.draw()
+    # soil.draw()
     # print(soil)
-    return sum(1 for ((x, y),val) in soil.grid.items() if val in '~' and soil.min_y <= y < soil.max_y) 
+    return sum(1 for ((x, y), val) in soil.grid.items() if val in '~' and soil.min_y <= y < soil.max_y)
 
 
 assert madness('Day 17/example.0.txt') == 29

@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 
 
 def polymerization(path):
@@ -19,5 +19,5 @@ def polymerization(path):
     return len(poly)
 
 
-assert(polymerization('Day 5/example.txt') == 10)
-print(polymerization('Day 5/input.txt'))
+assert polymerization('Day 05/example.txt') == 10
+print(polymerization('Day 05/input.txt'))

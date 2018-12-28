@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 
 
 class InvalidRegister(Exception):
@@ -156,7 +156,8 @@ class Test:
 
     def get_valid_opcodes(self):
         valid_opcodes = []
-        method_list = [func for func in dir(Machine) if callable(getattr(Machine, func)) and not func.startswith("_")]
+        method_list = [func for func in dir(Machine) if callable(
+            getattr(Machine, func)) and not func.startswith("_")]
         for opcode in method_list:
             m = Machine(*self.init_state)
             getattr(Machine, opcode)(m, *self.args)
@@ -165,16 +166,15 @@ class Test:
         return valid_opcodes
 
 
-
 def madness(path):
     with open(path) as f:
         raw_data = f.read().split('\n\n\n\n')[0]
     commands = [Test(lines) for lines in raw_data.split('\n\n')]
-    
+
     n = 0
     for c in commands:
         if len(c.get_valid_opcodes()) >= 3:
-            n+=1
+            n += 1
     return n
 
 

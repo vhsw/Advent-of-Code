@@ -1,5 +1,6 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 import networkx as nx
+
 
 class Star:
     def __init__(self, pos: tuple):
@@ -13,13 +14,13 @@ class Star:
 
     def __repr__(self):
         return f'Star{self.pos}'
-    
+
     def __eq__(self, other):
         return self.pos == other.pos
-    
+
     def __hash__(self):
         return hash(self.pos)
-    
+
     def distance(self, other):
         return sum(abs(s - o) for (s, o) in zip(self.pos, other.pos))
 
@@ -41,10 +42,6 @@ def madness(path):
     return nx.number_connected_components(graph)
 
 
-    
-
-
-        
 assert madness('Day 25/example.0.txt') == 2
 assert madness('Day 25/example.1.txt') == 4
 assert madness('Day 25/example.2.txt') == 3

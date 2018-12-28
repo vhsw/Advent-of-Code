@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 
 
 def puzzle(path):
@@ -28,10 +28,10 @@ def puzzle(path):
     return
 
 
-assert(puzzle('Day 9/example.0.txt') == 32)
-assert(puzzle('Day 9/example.1.txt') == 8317)
-assert(puzzle('Day 9/example.2.txt') == 146373)
-assert(puzzle('Day 9/example.3.txt') == 2764)
-assert(puzzle('Day 9/example.4.txt') == 54718)
-assert(puzzle('Day 9/example.5.txt') == 37305)
-print(puzzle('Day 9/input.txt'))
+assert puzzle('Day 09/example.0.txt') == 32
+assert puzzle('Day 09/example.1.txt') == 8317
+assert puzzle('Day 09/example.2.txt') == 146373
+assert puzzle('Day 09/example.3.txt') == 2764
+assert puzzle('Day 09/example.4.txt') == 54718
+assert puzzle('Day 09/example.5.txt') == 37305
+print(puzzle('Day 09/input.txt'))

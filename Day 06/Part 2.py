@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 
 import string
 
@@ -71,5 +71,5 @@ def area(path, lim):
     return grid.max_area(lim)
 
 
-assert(area('Day 6/example.txt', 32) == 16)
-print(area('Day 6/input.txt', 10000))
+assert area('Day 06/example.txt', 32) == 16
+print(area('Day 06/input.txt', 10000))

@@ -180,9 +180,9 @@ def madness(path):
     step = -1
     while board.step():
         step += 1
-        print(step)
-        print(board)
-        import time
+        # print(step)
+        # print(board)
+        # import time
         # time.sleep(0.05)
 
     return sum(u.health for u in board.units) * step

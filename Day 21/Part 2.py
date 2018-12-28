@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 # this code will run basically forever
 # disassembled elven code in disass.py
 

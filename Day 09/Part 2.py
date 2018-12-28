@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 from collections import deque
 
 
@@ -26,4 +26,4 @@ def puzzle(path):
                 marbles.append(current)
 
 
-print(puzzle('Day 9/input.txt'))
+print(puzzle('Day 09/input.txt'))
