@@ -1,5 +1,6 @@
+"""Day 3 Tests"""
 import pytest
-from wires import distance, points, steps
+from wires import distance, steps, part1, part2
 
 
 @pytest.mark.parametrize(
@@ -32,3 +33,8 @@ def test_wires(wire1, wire2, result):
 )
 def test_steps(wire1, wire2, result):
     assert steps(wire1, wire2) == result
+
+
+def test_parts():
+    assert part1() == 855
+    assert part2() == 11238

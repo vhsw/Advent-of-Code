@@ -1,47 +1,22 @@
-import turtle
-
-
-# def draw_path(path):
-#     x, y = zip(*path)
-#     plt.scatter(x, y, s=1)
-#     plt.show()
-
-
-def draw(wire1, wire2):
-    headings = {"R": 90, "L": -90, "U": 0, "D": 180}
-    for wire in (wire1, wire2):
-        turtle.home()
-        turtle.speed(0)
-        print(turtle.color())
-        if turtle.color()[0] == "black":
-            turtle.pencolor("red")
-        else:
-            turtle.pencolor("blue")
-        for command in wire.split(","):
-            h, *dist = command
-            dist = int("".join(dist))
-            turtle.setheading(headings[h])
-            turtle.forward(dist // 100)
-    turtle.done()
-
-    return None
+"""Day 3 Answers"""
 
 
 def parse_command(command):
-    heading = command[0]
-    distance = int(command[1:])
-    return heading, distance
+    """Return direction and distance for command"""
+    return command[0], int(command[1:])
 
 
-def point(pos, heading, distance):
-    if heading == "R":
-        return pos[0], pos[1] + distance
-    if heading == "L":
-        return pos[0], pos[1] - distance
-    if heading == "U":
-        return pos[0] + distance, pos[1]
-    if heading == "D":
-        return pos[0] - distance, pos[1]
+def move(pos, direction):
+    """move position for given direction"""
+    if direction == "R":
+        return pos[0], pos[1] + 1
+    if direction == "L":
+        return pos[0], pos[1] - 1
+    if direction == "U":
+        return pos[0] + 1, pos[1]
+    if direction == "D":
+        return pos[0] - 1, pos[1]
+    raise ValueError
 
 
 def points(wire):
@@ -49,9 +24,9 @@ def points(wire):
     result = {}
     length = 0
     for command in wire:
-        h, d = parse_command(command)
-        for _ in range(d):
-            pos = point(pos, h, 1)
+        direction, dist = parse_command(command)
+        for _ in range(dist):
+            pos = move(pos, direction)
             length += 1
             result[pos] = length
 
@@ -84,10 +59,23 @@ def steps(wire1, wire2):
     return min(distances)
 
 
+INPUT = "2019/Day 03/input"
+
+
+def part1():
+    with open(INPUT) as data:
+        WIRE1, WIRE2 = data.readlines()
+    return distance(WIRE1, WIRE2)
+
+
+def part2():
+    with open(INPUT) as data:
+        WIRE1, WIRE2 = data.readlines()
+    return steps(WIRE1, WIRE2)
+
+
 if __name__ == "__main__":
-    with open("input", "r") as data:
-        wire1, wire2 = data.readlines()
-    result1 = distance(wire1, wire2)
-    print(f"Part 1: {result1}")
-    result2 = steps(wire1, wire2)
-    print(f"Part 2: {result2}")
+    ANSWER1 = part1()
+    print(f"Part 1: {ANSWER1}")
+    ANSWER2 = part2()
+    print(f"Part 2: {ANSWER2}")
