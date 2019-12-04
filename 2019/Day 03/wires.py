@@ -20,6 +20,7 @@ def move(pos, direction):
 
 
 def points(wire):
+    """Convert wire to set of points"""
     pos = (0, 0)
     result = {}
     length = 0
@@ -34,6 +35,7 @@ def points(wire):
 
 
 def distance(wire1, wire2):
+    """Manhattan distance to the wires intersection point"""
     wire1 = wire1.split(",")
     wire2 = wire2.split(",")
     points1 = set(points(wire1))
@@ -44,6 +46,7 @@ def distance(wire1, wire2):
 
 
 def steps(wire1, wire2):
+    """Number of steps to the nearest intersection point"""
     wire1 = wire1.split(",")
     wire2 = wire2.split(",")
     points1 = points(wire1)
@@ -63,12 +66,14 @@ INPUT = "2019/Day 03/input"
 
 
 def part1():
+    """Part 1 answer"""
     with open(INPUT) as data:
         WIRE1, WIRE2 = data.readlines()
     return distance(WIRE1, WIRE2)
 
 
 def part2():
+    """Part 2 answer"""
     with open(INPUT) as data:
         WIRE1, WIRE2 = data.readlines()
     return steps(WIRE1, WIRE2)
