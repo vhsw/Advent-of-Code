@@ -1,5 +1,6 @@
+"""Day 2 Tests"""
 import pytest
-from computer import evaluate
+from computer import evaluate, part1, part2
 
 
 @pytest.mark.parametrize(
@@ -17,3 +18,8 @@ from computer import evaluate
 )
 def test_computer(code, result):
     assert evaluate(code) == result
+
+
+def test_parts():
+    assert part1() == 6327510
+    assert part2() == 4112
