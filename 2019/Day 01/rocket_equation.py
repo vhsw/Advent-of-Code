@@ -18,11 +18,13 @@ INPUT = "2019/Day 01/input"
 
 
 def part1():
+    """Part 1 answer"""
     with open(INPUT) as data:
         return sum(just_fuel(int(mass)) for mass in data)
 
 
 def part2():
+    """Part 2 answer"""
     with open(INPUT) as data:
         return sum(total_fuel(int(mass)) for mass in data)
 

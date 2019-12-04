@@ -10,12 +10,14 @@ INPUT = "2019/Day 05/input"
 
 
 def part1():
+    """Part 1 answer"""
     with open(INPUT) as data:
         pass
     return 0
 
 
 def part2():
+    """Part 2 answer"""
     with open(INPUT) as data:
         pass
     return 0

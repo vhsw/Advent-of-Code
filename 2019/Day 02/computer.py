@@ -32,15 +32,20 @@ def evaluate(code, noun=None, verb=None):
         pos += 4
 
 
+INPUT = "2019/Day 02/input"
+
+
 def part1():
-    with open("2019/Day 02/input", "r") as f:
+    """Part 1 answer"""
+    with open(INPUT) as f:
         code = list(map(int, f.read().split(",")))
     result = evaluate(code, 12, 2)
     return result[0]
 
 
 def part2():
-    with open("2019/Day 02/input") as f:
+    """Part 2 answer"""
+    with open(INPUT) as f:
         code = list(map(int, f.read().split(",")))
     for noun in range(100):
         for verb in range(100):
