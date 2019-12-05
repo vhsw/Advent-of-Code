@@ -1,4 +1,4 @@
-"""Day N Tests"""
+"""Day 6 Tests"""
 
 import pytest
 from puzzle import func, part1, part2

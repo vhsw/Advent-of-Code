@@ -1,4 +1,4 @@
-"""Day 5 Answers"""
+"""Day 6 Answers"""
 
 
 def func(param):
@@ -6,7 +6,7 @@ def func(param):
     return param
 
 
-INPUT = "2019/Day 05/input"
+INPUT = "2019/Day 06/input"
 
 
 def part1():
