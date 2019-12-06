@@ -20,7 +20,6 @@ def total_transfers(orbs: str):
         graph.add_edge(src, dst)
     src, *_ = graph.predecessors("YOU")
     dst, *_ = graph.predecessors("SAN")
-    print(src, dst)
     return nx.shortest_path_length(graph.to_undirected(), src, dst)
 
 
