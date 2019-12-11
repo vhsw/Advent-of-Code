@@ -1,6 +1,6 @@
 """Day 07 Answers"""
 from itertools import permutations
-from intcode import Intcode
+from intcode_v7 import Intcode
 from intcode_generator import Intcode as Intcode_generator
 
 
