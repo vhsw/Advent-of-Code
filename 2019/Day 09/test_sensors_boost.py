@@ -1,5 +1,5 @@
 """Day 9 Tests"""
-from intcode import Intcode
+from intcode_v9 import Intcode
 
 import pytest
 from sensors_boost import part1, part2

@@ -1,5 +1,5 @@
 """Day 9 Answers"""
-from intcode import Intcode
+from intcode_v9 import Intcode
 
 INPUT = "2019/Day 09/input"
 

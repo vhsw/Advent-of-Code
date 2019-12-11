@@ -1,16 +1,17 @@
-"""Day 5 Answers"""
+"""Intcode interpreter v11"""
+
+
+class InputError(Exception):
+    pass
 
 
 class Intcode:
     """An Intcode program is a list of integers separated by commas (like 1,0,0,3,99). To run one, start by looking at the first integer (called position 0). Here, you will find an opcode - either 1, 2, or 99. The opcode indicates what to do; for example, 99 means that the program is finished and should immediately halt. Encountering an unknown opcode means something went wrong."""
 
-    def __init__(self, code, input_data=None):
+    def __init__(self, code):
         self._ip = 0
         self.mem = dict(enumerate(code))
-        if input_data is None:
-            self.input_data = []
-        else:
-            self.input_data = input_data[::-1]
+        self.input_data = []
         self.output_data = []
         self.opcodes = {
             1: self._add,
@@ -27,9 +28,18 @@ class Intcode:
         self.__mode = 0
         self.__relative_base = 0
         self.__running = True
-        self.__evaluate()
 
-    def __evaluate(self):
+    @property
+    def running(self):
+        """running or halt"""
+        return self.__running
+
+    def provide_input(self, data):
+        """send input"""
+        self.input_data.append(data)
+        self._input()
+
+    def evaluate(self):
         """Eval code"""
         while self.__running:
             self.__mode, op = divmod(self.__readimmediate(), 100)
@@ -81,6 +91,8 @@ class Intcode:
 
     def _input(self):
         """Opcode 3 takes a single integer as input and saves it to the position given by its only parameter. For example, the instruction 3,50 would take an input value and store it at address 50."""
+        if not self.input_data:
+            raise InputError
         value = self.input_data.pop()
         self.__memstore(value)
 
