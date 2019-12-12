@@ -7,9 +7,7 @@ from copy import deepcopy
 from math import gcd
 import sys
 
-import seaborn as sns
 from matplotlib import pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.animation
 
 INPUT = "2019/Day 12/input"
