@@ -1,4 +1,7 @@
 """Day 13 Answers"""
+import curses
+
+
 from intcode_v13 import Intcode
 
 INPUT = "2019/Day 13/input"
@@ -8,18 +11,6 @@ def grouper(n, iterable):
     "grouper(3, 'ABCDEFG', 'x') --> ABC DEF Gxx"
     args = [iter(iterable)] * n
     return zip(*args)
-
-
-def parse(output):
-    """the x position (distance from the left), y position (distance from the top), and tile id. The tile id is interpreted as follows:
-
-    0 is an empty tile. No game object appears in this tile.
-    1 is a wall tile. Walls are indestructible barriers.
-    2 is a block tile. Blocks can be broken by the ball.
-    3 is a horizontal paddle tile. The paddle is indestructible.
-    4 is a ball tile. The ball moves diagonally and bounces off objects."""
-
-    return
 
 
 def part1():
@@ -33,20 +24,30 @@ def part1():
     return list(display.values()).count(2)
 
 
-def part2():
+def part2(stdscr):
     """Part 2 answer"""
     with open(INPUT) as data:
         data = data.read().strip().split(",")
     code = [int(d) for d in data]
     code[0] = 2
-    ic = Intcode(code)
+    ic = Intcode(code, stdscr)
     ic.evaluate()
-
-    return
+    return ic.score
 
 
 if __name__ == "__main__":
     ANSWER1 = part1()
-    print(f"Part 1: {ANSWER1}")
-    ANSWER2 = part2()
-    print(f"Part 2:\n{ANSWER2}")
+    # print(f"Part 1: {ANSWER1}")
+    try:
+        STDSCR = curses.initscr()
+        curses.noecho()
+        curses.cbreak()
+        curses.curs_set(0)
+        STDSCR.leaveok(True)
+        ANSWER2 = part2(STDSCR)
+        # print(f"Part 2: {ANSWER2}")
+
+    except KeyboardInterrupt:
+        pass
+    curses.endwin()
+    # print(f"Part 2: {ANSWER2}")

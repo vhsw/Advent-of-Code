@@ -1,10 +1,7 @@
 """Intcode interpreter v13"""
-import curses
-import time
 
-stdscr = curses.initscr()
-curses.noecho()
-curses.cbreak()
+import time
+from curses import error
 
 
 class InputError(Exception):
@@ -14,7 +11,7 @@ class InputError(Exception):
 class Intcode:
     """An Intcode program is a list of integers separated by commas (like 1,0,0,3,99). To run one, start by looking at the first integer (called position 0). Here, you will find an opcode - either 1, 2, or 99. The opcode indicates what to do; for example, 99 means that the program is finished and should immediately halt. Encountering an unknown opcode means something went wrong."""
 
-    def __init__(self, code):
+    def __init__(self, code, stdscr=None):
         self._ip = 0
         self.mem = dict(enumerate(code))
         self.input_data = []
@@ -34,8 +31,11 @@ class Intcode:
         self.__mode = 0
         self.__relative_base = 0
         self.__running = True
+        self.__stdscr = stdscr
         self.__ball = None
         self.__bar = None
+        self.score = 0
+        self.__skip_frames = 0
 
     @property
     def running(self):
@@ -106,17 +106,26 @@ class Intcode:
         2 is a block tile. Blocks can be broken by the ball.
         3 is a horizontal paddle tile. The paddle is indestructible.
         4 is a ball tile. The ball moves diagonally and bounces off objects."""
-
+        stdscr = self.__stdscr
+        if stdscr is None:
+            return
         for col, row, tile in self.parsed_output:
             if col == -1 and row == 0:
+                self.score = tile
                 stdscr.addstr(0, 0, f"Score: {tile}")
                 continue
-            stdscr.addch(row, col, " #*_O"[tile])
+            try:
+                stdscr.addch(row, col, " #*_O"[tile])
+            except error:
+                pass
             if tile == 3:
                 self.__bar = col
             if tile == 4:
                 self.__ball = col
-        stdscr.refresh()
+        if self.score < 8000 or self.__skip_frames > 20:
+            stdscr.refresh()
+            self.__skip_frames = 0
+        self.__skip_frames += 1
 
     def _input(self):
         """Opcode 3 takes a single integer as input and saves it to the position given by its only parameter. For example, the instruction 3,50 would take an input value and store it at address 50."""
@@ -130,8 +139,8 @@ class Intcode:
             value = 0
 
         self.__memstore(value)
-
-        # time.sleep(1 / 60)
+        if self.score < 3000:
+            time.sleep(1 / 30)
 
     def _output(self):
         """Opcode 4 outputs the value of its only parameter."""
