@@ -140,7 +140,7 @@ class Intcode:
 
         self.__memstore(value)
         if self.score < 3000:
-            time.sleep(1 / 30)
+            time.sleep(0.1)
 
     def _output(self):
         """Opcode 4 outputs the value of its only parameter."""
