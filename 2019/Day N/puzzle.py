@@ -1,11 +1,4 @@
 """Day N Answers"""
-
-
-def func(param):
-    """description"""
-    return param
-
-
 INPUT = "2019/Day N/input"
 
 
