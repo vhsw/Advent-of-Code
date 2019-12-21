@@ -1,0 +1,20 @@
+NOT A J
+NOT B T
+OR T J
+NOT C T
+OR T J
+AND D J
+# ^ safe
+NOT J T
+OR E T
+OR H T
+AND T J
+RUN
+
+# Jump schema
+#       @   @
+#      @ @ @ @
+#  ...@...@...@.....
+#  ####.#.#...#.####
+#     012345678901234567
+#      ABCDEFGHI
