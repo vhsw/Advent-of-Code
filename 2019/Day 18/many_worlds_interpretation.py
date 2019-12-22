@@ -1,8 +1,19 @@
 """Day 18 Answers"""
 
-from typing import NamedTuple, Dict, Set, Tuple, List
-
+from typing import (
+    NamedTuple,
+    Dict,
+    Set,
+    Tuple,
+    Optional,
+    FrozenSet,
+    Iterator,
+)
+from collections import deque
+from itertools import combinations
 import networkx as nx
+
+INPUT = "2019/Day 18/input"
 
 
 class Vec(NamedTuple):
@@ -15,7 +26,7 @@ class Vec(NamedTuple):
         return Vec(self.line + other.line, self.col + other.col)
 
 
-def parse(data: str):
+def parse(data: str) -> Tuple[Dict[Vec, str], Dict[str, Vec]]:
     """Parse map"""
     field: Dict[Vec, str] = {}
     objects: Dict[str, Vec] = {}
@@ -29,93 +40,103 @@ def parse(data: str):
     return field, objects
 
 
-def near(p):
-    return [p + dp for dp in [Vec(0, 1), Vec(0, -1), Vec(1, 0), Vec(-1, 0),]]
+def neighbors(p: Vec) -> Iterator[Vec]:
+    """yield points near p"""
+    for dp in [
+        Vec(0, 1),
+        Vec(0, -1),
+        Vec(1, 0),
+        Vec(-1, 0),
+    ]:
+        yield p + dp
 
 
-def get_available_keys(pos: Vec, field, open_doors=""):
-    """distance to currenly available keys"""
-    open_tiles = open_doors + ".@"
-    open_tiles = open_tiles.upper()
-    points = set()
-    keys: Set[Vec] = set()
-    for p in field:
-        if field[p] in open_tiles:
-            points.add(p)
-        if field[p].islower():
-            keys.add(p)
-            points.add(p)
+def field_graph(field, objects) -> nx.Graph:
+    """make graph form field"""
     graph = nx.Graph()
-    for p in points:
-        for near_p in near(p):
-            if near_p in points:
-                graph.add_edge(p, near_p)
-
-    key_list = []
-    for k in keys:
-        try:
-            path = nx.shortest_path(graph, pos, k)
-            key_list.append((k, path))
-        except nx.NetworkXNoPath:
-            pass
-    return key_list
-
-
-def key_graph(pos: Vec, field: Dict[Vec, str], objects):
-    graph = nx.DiGraph()
-    visited: Set[Tuple[Vec, str]] = set()
-    all_keys = set(o for o in objects if o.islower())
-    print(all_keys)
-    ends = []
-
-    def f(pos: Vec, keys=""):
-        if set(keys) == all_keys:
-            ends.append(pos)
-            return
-        if (pos, keys) in visited:
-            return
-        visited.add((pos, keys))
-        collected = field[pos]
-        if collected == "@":
-            collected = ""
-        for t, p in get_available_keys(pos, field, keys + collected):
-            if field[t] in keys:
-                continue
-            graph.add_edge(pos, t, weight=len(p))
-            new_doors = keys if collected in keys else keys + collected
-            f(t, new_doors)
-
-    f(pos)
-    print(ends)
-    pathes_lens = []
-    for end in ends:
-        l = nx.shortest_path_length(graph, pos, end, weight="weight")
-        pathes_lens.append(l)
-        print(l, "allah")
-    return min(pathes_lens)
+    entrance = objects["@"]
+    visited: Set[Vec] = set()
+    queue = deque([entrance])
+    while queue:
+        src = queue.popleft()
+        if src in visited:
+            continue
+        visited.add(src)
+        for dst in neighbors(src):
+            if dst in field:
+                graph.add_edge(src, dst)
+                queue.append(dst)
+    return graph
 
 
-INPUT = "2019/Day 18/input"
+def key_to_key_graph(fg, field, objects) -> nx.Graph:
+    """return graph with distances between nodes, required open doors and collected keys"""
+    pois = [obj for obj in objects if obj.islower() or obj == "@"]
+    graph = nx.Graph()
+    for obj1, obj2 in combinations(pois, 2):
+        p1 = objects[obj1]
+        p2 = objects[obj2]
+        path = nx.shortest_path(fg, p1, p2)
+        doors = frozenset(field[p] for p in path if field[p].isupper())
+        keys = frozenset(field[p].upper() for p in path if field[p].islower())
+        closed_doors = doors - keys
+        graph.add_edge(p1, p2, length=len(path) - 1, doors=closed_doors, keys=keys)
+    return graph
+
+
+def dijkstra(k2k: nx.Graph, start: Vec, all_doors) -> int:
+    """return shortest path between all keys or rises ValueError"""
+    visited = set()
+    Node = Optional[Tuple[Vec, FrozenSet[str]]]
+    node: Node = (start, frozenset())
+    costs = {node: 0}
+    parents: Dict[Node, Node] = {node: None}
+    while node:
+        visited.add(node)
+        cost = costs[node]
+        pos, open_doors = node
+
+        if open_doors == all_doors:
+            return cost
+
+        available_keys = []
+        for n, a in k2k[pos].items():
+            if open_doors >= a["doors"]:
+                available_keys.append(n)
+        for key in available_keys:
+            new_cost = cost + k2k.edges[(pos, key)]["length"]
+            collected_keys = k2k.edges[(pos, key)]["keys"]
+            pos_key = key, collected_keys | open_doors
+            if pos_key not in costs or costs[pos_key] > new_cost:
+                costs[pos_key] = new_cost
+                parents[pos_key] = node
+
+        todo = (n for n in costs if n not in visited)
+        node = min(todo, key=lambda n: costs[n], default=None)
+    raise ValueError
+
+
+def shortest_path_length(data) -> int:
+    """return shortest path between all keys"""
+    field, objects = parse(data)
+    fg = field_graph(field, objects)
+    k2k = key_to_key_graph(fg, field, objects)
+    entrance = objects["@"]
+    all_doors = set(k.upper() for k in objects if k.islower())
+    return dijkstra(k2k, entrance, all_doors)
 
 
 def part1():
     """Part 1 answer"""
     with open(INPUT) as data:
         data = data.read()
-        data = """########################
-    #...............b.C.D.f#
-    #.######################
-    #.....@.a.B.c.d.A.e.F.g#
-    ########################"""
-    field, objects = parse(data)
-    entrance = objects["@"]
-    return key_graph(entrance, field, objects)
+    return shortest_path_length(data)
 
 
 def part2():
     """Part 2 answer"""
     with open(INPUT) as data:
-        pass
+        data = data.read()
     return 0
 
 
