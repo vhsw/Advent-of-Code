@@ -41,5 +41,5 @@ def test_shuffle(example):
 
 
 def test_parts():
-    assert part1() == 0
-    assert part2() == 0
+    assert part1() == 6794
+    assert part2() == 70725194521472
