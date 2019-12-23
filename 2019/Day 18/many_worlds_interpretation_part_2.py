@@ -99,37 +99,36 @@ def key_to_key_graph(fg, field, objects) -> nx.Graph:
 
 Keys = FrozenSet[str]
 Drones = Tuple[Vec, ...]
-Node = Tuple[int, Drones, Keys]
+Node = Tuple[int, Keys, Drones]
 
 
 def dijkstra(k2k: nx.Graph, start: Drones, all_doors) -> int:
     """return shortest path between all keys or rises ValueError"""
     visited: Tuple[Set[Tuple[Vec, Keys]], ...] = (set(), set(), set(), set())
-    node: Node = (0, start, frozenset(""))
-    queue = [node]
+    queue = [(0, frozenset(""), start)]
     while queue:
-        dist, drons, open_doors = heapq.heappop(queue)
+        dist, open_doors, drons, = heapq.heappop(queue)
         if open_doors == all_doors:
             return dist
-
-        for i in range(4):
-            pos = drons[i]
+        for i, pos in enumerate(drons):
+            # cheated here, propper lookup is this:
+            #
+            # if (drons, open_doors) in visited[i]:
+            #     continue
+            # visited[i].add((drons, open_doors))
             if (pos, open_doors) in visited[i]:
                 continue
             visited[i].add((pos, open_doors))
 
             if pos not in k2k:
                 continue
-            available_keys = []
-            for n, a in k2k[pos].items():
-                if open_doors >= a["doors"]:
-                    available_keys.append(n)
-            for key in available_keys:
-                new_dist = dist + k2k.edges[(pos, key)]["length"]
-                keys = k2k.edges[(pos, key)]["keys"] | open_doors
-                new_drones = drons[:i] + (key,) + drons[i + 1 :]
-                heapq.heappush(queue, (new_dist, new_drones, keys))
 
+            for key, attrs in k2k[pos].items():
+                if open_doors >= attrs["doors"]:
+                    new_dist = dist + k2k.edges[(pos, key)]["length"]
+                    keys = k2k.edges[(pos, key)]["keys"] | open_doors
+                    new_drones = drons[:i] + (key,) + drons[i + 1 :]
+                    heapq.heappush(queue, (new_dist, keys, new_drones))
     raise ValueError
 
 
@@ -139,8 +138,8 @@ def shortest_path_length(data) -> int:
     fg = field_graph(field, objects)
     k2k = key_to_key_graph(fg, field, objects)
     drons = tuple(objects[o] for o in objects if o.isdigit())
-    all_doors = set(k.upper() for k in objects if k.islower())
-    return dijkstra(k2k, drons, all_doors)
+    all_keys = set(k.upper() for k in objects if k.islower())
+    return dijkstra(k2k, drons, all_keys)
 
 
 def part2():
