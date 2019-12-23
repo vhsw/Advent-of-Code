@@ -10,12 +10,13 @@ from many_worlds_interpretation_part_2 import shortest_path_length as sp2, part2
     "maze, length",
     [
         [
-            """########################
+            """
+########################
 #...............b.C.D.f#
 #.######################
 #.....@.a.B.c.d.A.e.F.g#
 ########################""",
-            81,
+            132,
         ],
     ],
 )
@@ -46,18 +47,6 @@ def test_path_len(maze, length):
 #############""",
             32,
         ],
-        [
-            """#############
-#g#f.D#..h#l#
-#F###e#E###.#
-#dCba...BcIJ#
-#####.@.#####
-#nK.L...G...#
-#M###N#H###.#
-#o#m..#i#jk.#
-#############""",
-            72,
-        ],
     ],
 )
 def test_path_len_2(maze, length):
@@ -65,5 +54,5 @@ def test_path_len_2(maze, length):
 
 
 def test_parts():
-    assert part1() == 0
-    assert part2() == 0
+    assert part1() == 4676
+    assert part2() == 2066

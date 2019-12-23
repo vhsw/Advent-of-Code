@@ -1,5 +1,5 @@
 """Day 18 Answers part 1"""
-
+import heapq
 from typing import (
     NamedTuple,
     Dict,
@@ -79,22 +79,23 @@ def key_to_key_graph(fg, field, objects) -> nx.Graph:
         path = nx.shortest_path(fg, p1, p2)
         doors = frozenset(field[p] for p in path if field[p].isupper())
         keys = frozenset(field[p].upper() for p in path if field[p].islower())
-        closed_doors = doors - keys
-        graph.add_edge(p1, p2, length=len(path) - 1, doors=closed_doors, keys=keys)
+        if len(keys) <= 2:
+            closed_doors = doors - keys
+            graph.add_edge(p1, p2, length=len(path) - 1, doors=closed_doors, keys=keys)
     return graph
 
 
 def dijkstra(k2k: nx.Graph, start: Vec, all_doors) -> int:
     """return shortest path between all keys or rises ValueError"""
-    visited = set()
-    Node = Optional[Tuple[Vec, FrozenSet[str]]]
-    node: Node = (start, frozenset())
-    costs = {node: 0}
-    parents: Dict[Node, Node] = {node: None}
-    while node:
-        visited.add(node)
-        cost = costs[node]
-        pos, open_doors = node
+    visited: Set[Tuple[Vec, FrozenSet[str]]] = set()
+    Node = Tuple[int, Vec, FrozenSet[str]]
+    node: Node = (0, start, frozenset(""))
+    queue = [node]
+    while queue:
+        cost, pos, open_doors = heapq.heappop(queue)
+        if (pos, open_doors) in visited:
+            continue
+        visited.add((pos, open_doors))
 
         if open_doors == all_doors:
             return cost
@@ -103,16 +104,10 @@ def dijkstra(k2k: nx.Graph, start: Vec, all_doors) -> int:
         for n, a in k2k[pos].items():
             if open_doors >= a["doors"]:
                 available_keys.append(n)
-        for key in available_keys:
-            new_cost = cost + k2k.edges[(pos, key)]["length"]
-            collected_keys = k2k.edges[(pos, key)]["keys"]
-            pos_key = key, collected_keys | open_doors
-            if pos_key not in costs or costs[pos_key] > new_cost:
-                costs[pos_key] = new_cost
-                parents[pos_key] = node
-
-        todo = (n for n in costs if n not in visited)
-        node = min(todo, key=lambda n: costs[n], default=None)
+        for dst in available_keys:
+            new_cost = cost + k2k.edges[(pos, dst)]["length"]
+            keys = k2k.edges[(pos, dst)]["keys"] | open_doors
+            heapq.heappush(queue, (new_cost, dst, keys))
     raise ValueError
 
 
