@@ -1,0 +1,17 @@
+south
+take fixed point
+north
+north
+take candy cane
+west
+west
+take shell
+east
+east
+north
+north
+take polygon
+south
+west
+west
+west
