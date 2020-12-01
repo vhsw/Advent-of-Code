@@ -25,7 +25,7 @@ def download(date):
     soup = BeautifulSoup(req.text, "lxml")
     title = soup.select_one("body > main > article > h2")
     if match := re.match(r"--- Day \d+: (.+) ---", title.get_text()):
-        name = match.group(1).lower().replace(" ", "_") + ".py"
+        name = re.sub("\W", "_", match.group(1).lower()).strip("_") + ".py"
         with open(directory + name, "w") as fp:
             fp.write(
                 f""""Day {date.day:02d} answers"
