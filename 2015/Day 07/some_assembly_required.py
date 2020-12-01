@@ -76,6 +76,29 @@ def part1(data):
 
 def part2(data):
     "Part 2 answer"
+    lst = []
+    wires = {}
+    for line in data:
+        op, *ins, out = parse(line)
+        lst.append([op, ins, out])
+        wires[out] = None
+        for i in ins:
+            if isinstance(i, str):
+                wires[i] = None
+            else:
+                wires[i] = i
+    wires["b"] = 956
+    todo = [[op, ins, out] for op, ins, out in lst if wires[out] is None]
+    while todo:
+        for op, ins, out in todo:
+            if not all(wires[i] is not None for i in ins):
+                continue
+            res = do(op, [wires[i] for i in ins])
+            if res is not None:
+                if out == "a":
+                    return res
+                wires[out] = res
+        todo = [[op, ins, out] for op, ins, out in lst if wires[out] is None]
 
 
 if __name__ == "__main__":
