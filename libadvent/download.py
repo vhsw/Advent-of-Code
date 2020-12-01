@@ -5,6 +5,7 @@ import requests
 from dotenv import load_dotenv
 
 from os import environ, makedirs
+from os.path import isfile
 from bs4 import BeautifulSoup
 import re
 
@@ -25,10 +26,11 @@ def download(date):
     soup = BeautifulSoup(req.text, "lxml")
     title = soup.select_one("body > main > article > h2")
     if match := re.match(r"--- Day \d+: (.+) ---", title.get_text()):
-        name = re.sub("\W", "_", match.group(1).lower()).strip("_") + ".py"
-        with open(directory + name, "w") as fp:
-            fp.write(
-                f""""Day {date.day:02d} answers"
+        name = re.sub(r"\W", "_", match.group(1).lower()).strip("_") + ".py"
+        if not isfile(directory + name):
+            with open(directory + name, "w") as fp:
+                fp.write(
+                    f""""Day {date.day:02d} answers"
 INPUT = "{directory}input.txt"
 
 
@@ -46,7 +48,7 @@ if __name__ == "__main__":
     print(f"Part 1: {{ part1(DATA) }}")
     print(f"Part 2: {{ part2(DATA) }}")
 """
-            )
+                )
 
     with open(directory + "input.txt", "w") as fp:
         req = requests.get(url + "/input", cookies={"session": environ["SESSION"]})
