@@ -2,3 +2,4 @@
 .hypothesis
 .venv
 .pytest_cache
+.env
