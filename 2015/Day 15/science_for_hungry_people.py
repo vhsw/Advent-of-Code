@@ -1,7 +1,6 @@
 "Day 15 answers"
 import re
 from itertools import combinations_with_replacement
-from typing import Counter
 import numpy as np
 
 INPUT = "2015/Day 15/input.txt"
