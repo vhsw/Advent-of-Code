@@ -26,7 +26,7 @@ def download(date):
     soup = BeautifulSoup(req.text, "lxml")
     title = soup.select_one("body > main > article > h2")
     if match := re.match(r"--- Day \d+: (.+) ---", title.get_text()):
-        name = re.sub(r"\W", "_", match.group(1).lower()).strip("_") + ".py"
+        name = re.sub(r"\W+", "_", match.group(1).lower()).strip("_") + ".py"
         if not isfile(directory + name):
             with open(directory + name, "w") as fp:
                 fp.write(
