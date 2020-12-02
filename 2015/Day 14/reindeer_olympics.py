@@ -1,5 +1,4 @@
 "Day 14 answers"
-from os import device_encoding
 import re
 
 INPUT = "2015/Day 14/input.txt"
