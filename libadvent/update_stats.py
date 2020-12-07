@@ -1,5 +1,5 @@
 import re
-from os import environ, stat
+from os import environ
 
 import requests
 from bs4 import BeautifulSoup
@@ -9,7 +9,7 @@ load_dotenv(verbose=True)
 
 
 def update_stats():
-    url = f"https://adventofcode.com/2020/events"
+    url = "https://adventofcode.com/2020/events"
     req = requests.get(url, cookies={"session": environ["SESSION"]})
     soup = BeautifulSoup(req.text, "lxml")
     stats = soup.select('body > main > article > div[class="eventlist-event"]')
