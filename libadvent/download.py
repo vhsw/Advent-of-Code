@@ -1,13 +1,12 @@
+import re
 from datetime import datetime
+from os import environ, makedirs
+from os.path import isfile
 
 import click
 import requests
-from dotenv import load_dotenv
-
-from os import environ, makedirs
-from os.path import isfile
 from bs4 import BeautifulSoup
-import re
+from dotenv import load_dotenv
 
 load_dotenv(verbose=True)
 
