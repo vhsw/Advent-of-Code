@@ -25,7 +25,7 @@ def update_stats():
         badge = ":star:"
         if stars == 50:
             badge = ":star2:"
-        text += f"- {year}: {stars} {badge}\n"
+        text += f"- {year}: {stars:02d} {badge}\n"
 
     text += f"\nTotal stars: {total} :star:\n"
     with open("README.md") as fp:
