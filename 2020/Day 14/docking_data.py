@@ -49,9 +49,5 @@ def part2(data):
 if __name__ == "__main__":
     with open(INPUT) as fp:
         DATA = fp.read()
-    DATA1 = """mask = 000000000000000000000000000000X1001X
-mem[42] = 100
-mask = 00000000000000000000000000000000X0XX
-mem[26] = 1"""
     print(f"Part 1: { part1(DATA) }")
     print(f"Part 2: { part2(DATA) }")
