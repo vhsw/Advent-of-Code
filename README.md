@@ -4,11 +4,11 @@ Solved puzzles from [Advent of Code](https://adventofcode.com)
 
 ## Stats
 
-- 2020: 28 :star:
+- 2020: 30 :star:
 - 2019: 50 :star2:
 - 2018: 44 :star:
 - 2017: 00 :star:
 - 2016: 00 :star:
 - 2015: 46 :star:
 
-Total stars: 168 :star:
+Total stars: 170 :star:
