@@ -8,7 +8,7 @@ Solved puzzles from [Advent of Code](https://adventofcode.com)
 - 2019: 50 :star2:
 - 2018: 44 :star:
 - 2017: 04 :star:
-- 2016: 04 :star:
+- 2016: 08 :star:
 - 2015: 46 :star:
 
-Total stars: 180 :star:
+Total stars: 184 :star:
