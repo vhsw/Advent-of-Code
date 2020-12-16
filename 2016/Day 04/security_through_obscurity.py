@@ -12,7 +12,6 @@ def part1(data):
         name, sector, checksum = re.match(r"((?:\w+-)+)(\d+)\[(\w+)\]", line).groups()
         letters = {i for i, _ in Counter(sorted(name.replace("-", ""))).most_common(5)}
         if letters == set(checksum):
-            print(sector)
             s += int(sector)
     return s
 
