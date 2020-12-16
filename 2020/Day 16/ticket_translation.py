@@ -25,9 +25,7 @@ def part2(features, ticket, tickets):
     for i, vals in enumerate(zip(*tickets)):
         for feature in features:
             if features[feature].issuperset(set(vals)):
-                print(i, feature)
                 names.setdefault(i, []).append(feature)
-    print(names)
     while not all(len(v) == 1 for v in names.values()):
         for feature in names:
             if len(names[feature]) == 1:
@@ -37,7 +35,6 @@ def part2(features, ticket, tickets):
                         names[dup].remove(name)
                     except ValueError:
                         pass
-    print(names)
     mul = 1
     for k, v in names.items():
         if v[0].startswith("departure"):
