@@ -17,7 +17,7 @@ def update_stats():
     total = 0
     for s in stats:
         line = s.get_text()
-        year, stars = re.match(r"\[(\d{4})\](?: (\d+)\*)?", line).groups()
+        year, stars = re.match(r"\[(\d{4})\] +(\d+)\*", line).groups()
         if not stars:
             stars = 0
         stars = int(stars)
