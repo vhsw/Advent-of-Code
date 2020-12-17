@@ -1,8 +1,13 @@
 [tool.poetry]
-name = "advent_of_code"
+name = "libadvent"
 version = "2020"
-description = ""
+description = "Solved puzzles from Advent of Code and tools for interacting with the site"
+license = "MIT"
 authors = ["Alexey Dubrov <vhsw@ya.ru>"]
+
+[tool.poetry.scripts]
+download = "libadvent.download:download"
+update_stats = "libadvent.update_stats:update_stats"
 
 [tool.poetry.dependencies]
 python = "^3.9.1"
