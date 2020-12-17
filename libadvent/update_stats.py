@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+"""Update stats section in README.md"""
+
 import re
 from os import environ
 

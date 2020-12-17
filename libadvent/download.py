@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+"""Download input data and create answer template"""
+
 import re
 from datetime import datetime
 from os import environ, makedirs
