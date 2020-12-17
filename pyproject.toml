@@ -28,4 +28,4 @@ build-backend = "poetry.masonry.api"
 
 [tool.pylint]
 [tool.pylint.basic]
-good-names = ["df", "fp", "ex", "ip"]
+good-names = ["df", "fp", "ex", "ip", "dx", "dy", "dz", "dw"]
