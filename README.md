@@ -30,7 +30,7 @@ Without args, `download` will scrape puzzle input for today.
 - 2019: 50 :star2:
 - 2018: 44 :star:
 - 2017: 04 :star:
-- 2016: 18 :star:
+- 2016: 20 :star:
 - 2015: 46 :star:
 
-Total stars: 196 :star:
+Total stars: 198 :star:
