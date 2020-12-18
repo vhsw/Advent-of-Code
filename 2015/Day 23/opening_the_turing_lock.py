@@ -50,6 +50,6 @@ def part2(data):
 
 if __name__ == "__main__":
     with open(INPUT) as fp:
-        DATA = [l.strip() for l in fp.readlines()]
+        DATA = [line.strip() for line in fp.readlines()]
     print(f"Part 1: { part1(DATA) }")
     print(f"Part 2: { part2(DATA) }")
