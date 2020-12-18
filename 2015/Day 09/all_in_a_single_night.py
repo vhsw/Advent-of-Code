@@ -1,7 +1,8 @@
 "Day 09 answers"
 import re
-import networkx as nx
 from itertools import permutations
+
+import networkx as nx
 
 INPUT = "2015/Day 09/input.txt"
 

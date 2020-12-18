@@ -1,7 +1,6 @@
 "Day 03 answers"
 from typing import List, Tuple
 
-
 INPUT = "2016/Day 03/input.txt"
 
 
