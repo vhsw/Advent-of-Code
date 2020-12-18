@@ -1,7 +1,6 @@
 "Day 23 answers"
 from typing import List
 
-
 INPUT = "2015/Day 23/input.txt"
 
 

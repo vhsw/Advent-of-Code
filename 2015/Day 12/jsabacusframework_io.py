@@ -1,6 +1,6 @@
 "Day 12 answers"
-import re
 import json
+import re
 
 INPUT = "2015/Day 12/input.txt"
 

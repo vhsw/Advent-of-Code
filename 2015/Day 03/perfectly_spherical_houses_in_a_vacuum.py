@@ -1,5 +1,6 @@
 "Day 03 answers"
 from typing import Counter
+
 import numpy as np
 
 INPUT = "2015/Day 03/input.txt"

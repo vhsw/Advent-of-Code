@@ -1,5 +1,5 @@
 "Day 12 answers"
-from math import cos, sin, radians
+from math import cos, radians, sin
 
 INPUT = "2020/Day 12/input.txt"
 

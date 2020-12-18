@@ -1,9 +1,9 @@
 "Day 19 answers"
 import re
-from string import ascii_uppercase
-from typing import List
 from collections import deque
 from pprint import pprint
+from string import ascii_uppercase
+from typing import List
 
 INPUT = "2015/Day 19/input.txt"
 
