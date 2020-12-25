@@ -582,32 +582,32 @@ The experimental energy source is based on cutting-edge technology: a set of Con
 
 ### Year 2020 Day 18
 
-No egg found
+As you look out the window and notice a heavily-forested continent slowly appear over the horizon, you are interrupted by the child sitting next to you. They're curious if you could help them with their math (egg: Or "maths", if you have more than one.) homework.
 
 ### Year 2020 Day 19
 
-No egg found
+You land in an airport surrounded by dense forest. As you walk to your high-speed train, the Elves at the Mythical Information Bureau (egg: This is a purely fictional organization. Any resemblance to actual organizations, past or present, is purely coincidental.) contact you again. They think their satellite has collected an image of a sea monster! Unfortunately, the connection to the satellite is having problems, and many of the messages sent back from the satellite have been corrupted.
 
 ### Year 2020 Day 20
 
-No egg found
+The high-speed train leaves the forest and quickly carries you south. You can even see a desert in the distance! Since you have some spare time, you might as well (egg: Just in case. Maybe they missed something.) see if there was anything interesting in the image the Mythical Information Bureau satellite captured.
 
 ### Year 2020 Day 21
 
-No egg found
+You don't speak the local language, so you can't read any ingredients lists. However, sometimes, allergens are listed in a language you do understand. You should be able to use this information to determine which ingredient contains which allergen and work out which foods are safe (egg: I actually considered doing this once. I do not recommend it.) to take with you on your trip.
 
 ### Year 2020 Day 22
 
-No egg found
+You lost to the small crab! Fortunately, crabs aren't very good at recursion. To defend your honor as a Raft Captain, you challenge the small crab to a game of Recursive (egg: For some reason, nobody wants to play Recursive Twilight Imperium with me.) Combat.
 
 ### Year 2020 Day 23
 
-No egg found
+Due to what you can only assume is a mistranslation (you're not exactly fluent in Crab (egg: If I were going for a programming language pun here, I'd say you were a little... RUSTy.)), you are quite surprised when the crab starts arranging many cups in a circle on your raft - one million (1000000) in total.
 
 ### Year 2020 Day 24
 
-No egg found
+The tile floor in the lobby is meant to be a living art exhibit (egg: I need one of these!). Every day, the tiles are all flipped according to the following rules:
 
 ### Year 2020 Day 25
 
-No egg found
+The light turns green and the door unlocks. (egg: You notice the brand written on the side of the lock: Diffie, Hellman, and Merkle.) As you collapse onto the bed in your room, your pager goes off!

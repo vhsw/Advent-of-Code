@@ -20,7 +20,7 @@ def download(year, day):
         for span in p.select("span"):
             text = span.get("title")
             if text:
-                span.replace_with(f"(egg: {text})")
+                span.replace_with(f"{span.get_text()} (egg: {text})")
                 print(p.get_text())
 
 
