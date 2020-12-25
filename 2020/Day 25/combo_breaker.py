@@ -3,11 +3,7 @@ INPUT = "2020/Day 25/input.txt"
 
 
 def transform(subject_number, loop_size):
-    value = 1
-    for _ in range(loop_size):
-        value *= subject_number
-        value %= 20201227
-    return value
+    return pow(subject_number, loop_size, 20201227)
 
 
 def find_loop_size(public_key):
