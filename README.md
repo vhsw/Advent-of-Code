@@ -26,6 +26,7 @@ Without args, `download` will scrape puzzle input for today.
 
 ## Stats
 
+- 2021: 02 :star:
 - 2020: 50 :star2:
 - 2019: 50 :star2:
 - 2018: 44 :star:
@@ -33,4 +34,4 @@ Without args, `download` will scrape puzzle input for today.
 - 2016: 20 :star:
 - 2015: 46 :star:
 
-Total stars: 214 :star:
+Total stars: 216 :star:
