@@ -1,23 +1,16 @@
 [tool.poetry]
-name = "libadvent"
+name = "Advent of Code"
 version = "2021"
 description = "Solved puzzles from Advent of Code and tools for interacting with the site"
 license = "MIT"
 authors = ["Alexey Dubrov <vhsw@ya.ru>"]
-
-[tool.poetry.scripts]
-download = "libadvent.download:download"
-update_stats = "libadvent.update_stats:update_stats"
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.11"
 networkx = "^2.6.3"
 matplotlib = "^3.5.0"
 numpy = "^1.21.4"
-click = "^8.0.3"
-requests = "^2.26.0"
-python-dotenv = "^0.19.2"
-beautifulsoup4 = { extras = ["lxml"], version = "^4.10.0" }
+libadvent = {git = "git@github.com:vhsw/libadvent.git"}
 
 [tool.poetry.dev-dependencies]
 black = "^21.11b1"
