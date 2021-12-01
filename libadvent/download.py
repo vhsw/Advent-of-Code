@@ -32,24 +32,24 @@ def download(date):
         if not isfile(directory + name):
             with open(directory + name, "w") as fp:
                 fp.write(
-                    f""""Day {date.day:02d} answers"
+                    f'''"""Day {date.day:02d} answers"""
 INPUT = "{directory}input.txt"
 
 
 def part1(data):
-    "Part 1 answer"
+    """Part 1 answer"""
 
 
 def part2(data):
-    "Part 2 answer"
+    """Part 2 answer"""
 
 
 if __name__ == "__main__":
-    with open(INPUT) as fp:
+    with open(INPUT, encoding="utf-8") as fp:
         DATA = fp.read().strip()
     print(f"Part 1: {{ part1(DATA) }}")
     print(f"Part 2: {{ part2(DATA) }}")
-"""
+'''
                 )
 
     with open(directory + "input.txt", "w") as fp:
