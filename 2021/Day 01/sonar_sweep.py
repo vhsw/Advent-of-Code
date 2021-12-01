@@ -2,7 +2,8 @@
 import numpy as np
 from numpy.lib.stride_tricks import sliding_window_view
 
-INPUT = "2021/Day 01/input.txt"
+with open("2021/Day 01/input.txt", encoding="utf-8") as fp:
+    DATA = fp.read().strip().splitlines()
 
 
 def part1(data):
@@ -19,8 +20,5 @@ def part2(data):
 
 
 if __name__ == "__main__":
-    with open(INPUT, encoding="utf-8") as fp:
-        DATA = fp.read().strip().split()
-
     print(f"Part 1: { part1(DATA) }")
     print(f"Part 2: { part2(DATA) }")
