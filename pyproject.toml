@@ -19,6 +19,7 @@ mypy = "^0.910"
 pylint = "^2.12.1"
 pytest = "^6.1.5"
 libadvent = {git = "git@github.com:vhsw/libadvent.git"}
+ipykernel = "^6.6.0"
 
 [build-system]
 requires = ["poetry>=0.12"]
