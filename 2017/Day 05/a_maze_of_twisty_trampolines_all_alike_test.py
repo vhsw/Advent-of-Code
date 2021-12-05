@@ -4,7 +4,6 @@ from a_maze_of_twisty_trampolines_all_alike import DATA, part1, part2
 
 def test_part1():
     """Part 1 test"""
-
     assert part1([0, 3, 0, 1, -3]) == 5
     assert part1(DATA) == 396086
 

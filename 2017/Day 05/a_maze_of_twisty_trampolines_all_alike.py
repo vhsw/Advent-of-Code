@@ -16,7 +16,7 @@ def part1(data: list[int]):
     return step
 
 
-def part2(data):
+def part2(data: list[int]):
     """Part 2 solution"""
     offsets = data.copy()
     ip = 0
@@ -33,6 +33,5 @@ def part2(data):
 
 
 if __name__ == "__main__":
-
     print(f"Part 1: { part1(DATA) }")
     print(f"Part 2: { part2(DATA) }")

@@ -23,4 +23,4 @@ def test_no_anagrams():
 
 def test_part2():
     """Part 2 test"""
-    # assert part2(DATA) == 0
+    assert part2(DATA) == 208

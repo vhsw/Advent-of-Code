@@ -30,7 +30,7 @@ def redistribute(blocks: list[int]):
     return blocks
 
 
-def part2(data):
+def part2(data: list[int]):
     """Part 2 solution"""
     seen = {tuple(data)}
     while True:
