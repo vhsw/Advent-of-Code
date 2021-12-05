@@ -24,7 +24,7 @@ def part1(data: int):
     return circle + dist
 
 
-def centers(size):
+def centers(size: int):
     first = size - 1
     for i in range(4):
         yield first + i * (2 * size)
@@ -40,6 +40,9 @@ def part2(data: int):
         if val > data:
             raise StopIteration(val)
         grid[pos] = val
+
+    def f(n: int):
+        return 2 * n - 1
 
     try:
         for circle in count(1):
@@ -59,10 +62,6 @@ def part2(data: int):
         return ex.value
 
 
-def f(n):
-    return 2 * n - 1
-
-
 def offsets():
     for r in range(-1, 2):
         for c in range(-1, 2):
@@ -72,6 +71,5 @@ def offsets():
 
 
 if __name__ == "__main__":
-
     print(f"Part 1: { part1(DATA) }")
     print(f"Part 2: { part2(DATA) }")

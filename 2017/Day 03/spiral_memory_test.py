@@ -13,7 +13,4 @@ def test_part1():
 
 def test_part2():
     """Part 2 test"""
-    example = """
-
-""".strip().splitlines()
     assert part2(DATA) == 279138
