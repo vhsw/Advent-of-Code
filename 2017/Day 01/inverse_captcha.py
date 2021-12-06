@@ -1,30 +1,27 @@
-"Day 01 answers"
-INPUT = "2017/Day 01/input.txt"
+"""Day 1: Inverse Captcha"""
+with open("2017/Day 01/input.txt", encoding="utf-8") as fp:
+    DATA = fp.read().strip()
 
 
-def part1(data):
-    "Part 1 answer"
-    data = data.strip()
-    data = [int(i) for i in data] + [int(data[0])]
-    return sum(c for c, n in zip(data, data[1:]) if c == n)
+def part1(data: str):
+    """Part 1 solution"""
+    digits = list(map(int, data))
+    digits += [digits[0]]
+    return sum(c for c, n in zip(digits, digits[1:]) if c == n)
 
 
-def part2(data):
-    "Part 2 answer"
-    data = data.strip()
-    data = [int(i) for i in data]
-    s = 0
-    l = len(data)
-    for i, c in enumerate(data):
-        offset = (i + l // 2) % l
-        print(i, offset, c, data[offset])
-        if c == data[offset]:
-            s += c
-    return s
+def part2(data: str):
+    """Part 2 solution"""
+    digits = list(map(int, data))
+    length = len(digits)
+    total = 0
+    for idx, digit in enumerate(digits):
+        offset = (idx + length // 2) % length
+        if digit == digits[offset]:
+            total += digit
+    return total
 
 
 if __name__ == "__main__":
-    with open(INPUT) as fp:
-        DATA = fp.read()
     print(f"Part 1: { part1(DATA) }")
     print(f"Part 2: { part2(DATA) }")
