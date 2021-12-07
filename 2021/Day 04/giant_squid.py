@@ -1,5 +1,4 @@
 """Day 4: Giant Squid"""
-import re
 from typing import Iterable
 
 with open("2021/Day 04/input.txt", encoding="utf-8") as fp:
@@ -46,10 +45,7 @@ def parse_nums(nums: str):
 
 def parse_boards(boards: list[str]):
     return [
-        [
-            [int(num) for num in re.split(r"\s+", line.strip())]
-            for line in board.splitlines()
-        ]
+        [list(map(int, line.split())) for line in board.splitlines()]
         for board in boards
     ]
 

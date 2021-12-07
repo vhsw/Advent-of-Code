@@ -1,13 +1,13 @@
 """Day 2: Dive!"""
 with open("2021/Day 02/input.txt", encoding="utf-8") as fp:
-    DATA = fp.read().strip().splitlines()
+    DATA = fp.read().strip()
 
 
-def part1(data: list[str]):
+def part1(data: str):
     """Part 1 solution"""
     horizontal = 0
     depth = 0
-    for line in data:
+    for line in data.splitlines():
         direction, displacement = line.split()
         displacement = int(displacement)
         match direction:
@@ -20,12 +20,12 @@ def part1(data: list[str]):
     return horizontal * depth
 
 
-def part2(data):
+def part2(data: str):
     """Part 2 solution"""
     horizontal = 0
     depth = 0
     aim = 0
-    for line in data:
+    for line in data.splitlines():
         direction, displacement = line.split()
         displacement = int(displacement)
         match direction:
