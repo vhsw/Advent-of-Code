@@ -29,3 +29,6 @@ build-backend = "poetry.masonry.api"
 [tool.pylint.basic]
 good-names = ["df", "fp", "ex", "ip", "x", "y", "dx", "dy", "dz", "dw"]
 disable = ["missing-function-docstring", "import-error"]
+
+[tool.pytest.ini_options]
+addopts = "-x"
