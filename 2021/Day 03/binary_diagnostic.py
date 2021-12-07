@@ -31,6 +31,7 @@ def oxygen_bit_criteria(data: str):
         report = [line for line in report if line[pos] == target]
         if len(report) <= 1:
             return int(report[0], 2)
+    raise ValueError(data)
 
 
 def co2_bit_criteria(data: str):
@@ -41,6 +42,7 @@ def co2_bit_criteria(data: str):
         report = [line for line in report if line[pos] == target]
         if len(report) <= 1:
             return int(report[0], 2)
+    raise ValueError(data)
 
 
 if __name__ == "__main__":
