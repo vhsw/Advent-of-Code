@@ -17,21 +17,19 @@ def part1(data: str):
 
 def part2(data: str):
     """Part 2 solution"""
-    grid = {pos: val for pos, val in parse(data).items() if val < 9}
+    grid = {pos for pos, val in parse(data).items() if val < 9}
     sizes = []
     while grid:
-        todo = {next(iter(grid))}
+        todo = {grid.pop()}
         size = 0
         while todo:
-            pos = todo.pop()
-            if pos not in grid:
-                continue
             size += 1
-            del grid[pos]
-            for n_val in neighbors(pos):
-                todo.add(n_val)
+            pos = todo.pop()
+            grid.discard(pos)
+            for n_pos in neighbors(pos):
+                if n_pos in grid:
+                    todo.add(n_pos)
         sizes.append(size)
-
     return prod(sorted(sizes, reverse=True)[:3])
 
 
@@ -43,7 +41,7 @@ def parse(data: str):
     }
 
 
-def neighbors_vals(pos: complex, grid):
+def neighbors_vals(pos: complex, grid: dict[complex, int]):
     for n_pos in neighbors(pos):
         try:
             yield grid[n_pos]
