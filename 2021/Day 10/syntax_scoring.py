@@ -1,4 +1,7 @@
 """Day 10: Syntax Scoring"""
+from functools import reduce
+from typing import Iterable
+
 with open("2021/Day 10/input.txt", encoding="utf-8") as fp:
     DATA = fp.read().strip()
 
@@ -27,7 +30,7 @@ def part2(data: str):
     return sorted(scores)[len(scores) // 2]
 
 
-def autocomplete(line):
+def autocomplete(line: str):
     openings = {
         "(": ")",
         "[": "]",
@@ -42,10 +45,10 @@ def autocomplete(line):
             expected.pop()
         else:
             raise ValueError(char)
-    return reversed(expected)
+    return expected[::-1]
 
 
-def score_illigal(char):
+def score_illigal(char: str):
     return {
         ")": 3,
         "]": 57,
@@ -54,18 +57,14 @@ def score_illigal(char):
     }[char]
 
 
-def score_completion(line):
+def score_completion(line: Iterable[str]):
     scores = {
         ")": 1,
         "]": 2,
         "}": 3,
         ">": 4,
     }
-    score = 0
-    for char in line:
-        score *= 5
-        score += scores[char]
-    return score
+    return reduce(lambda x, char: x * 5 + scores[char], line, 0)
 
 
 if __name__ == "__main__":
