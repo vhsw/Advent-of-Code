@@ -17,6 +17,7 @@ hypothesis = "^6.29.0"
 mypy = "^0.910"
 pylint = "^2.12.1"
 pytest = "^6.1.5"
+pytest-xdist = { extras = ["psutil"], version = "^2.5.0" }
 libadvent = { git = "git@github.com:vhsw/libadvent.git" }
 ipykernel = "^6.6.0"
 matplotlib = "^3.5.0"

@@ -20,7 +20,8 @@ def knot_hash(data: str):
             pos += offset
             skip_size += 1
     numbers.rotate(pos)
-    return to_hex_str(condense(numbers))
+    val = int.from_bytes(condense(numbers), "big", signed=False)
+    return (bin(val)[2:]).rjust(128, "0")
 
 
 def condense(sparse_hash: Sequence[int]):
@@ -29,7 +30,3 @@ def condense(sparse_hash: Sequence[int]):
     size = 16
     for idx in range(0, 256, size):
         yield reduce(xor, sparse_hash[idx : idx + size])
-
-
-def to_hex_str(dense_hash: Sequence[int]):
-    return bytes(dense_hash).hex()

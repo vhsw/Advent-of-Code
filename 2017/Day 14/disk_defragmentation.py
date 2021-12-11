@@ -1,7 +1,7 @@
 """Day 14: Disk Defragmentation"""
 from typing import Counter
 
-from knot_hash import knot_hash
+from libknot_hash import knot_hash
 
 with open("2017/Day 14/input.txt", encoding="utf-8") as fp:
     DATA = fp.read().strip()
@@ -9,7 +9,7 @@ with open("2017/Day 14/input.txt", encoding="utf-8") as fp:
 
 def part1(data: str):
     """Part 1 solution"""
-    grid = (to_bin(knot_hash(f"{data}-{i}")) for i in range(128))
+    grid = (knot_hash(f"{data}-{i}") for i in range(128))
     return "".join(grid).count("1")
 
 
@@ -18,7 +18,7 @@ def part2(data: str):
     grid = {
         complex(row, col)
         for row in range(128)
-        for col, val in enumerate(to_bin(knot_hash(f"{data}-{row}")))
+        for col, val in enumerate(knot_hash(f"{data}-{row}"))
         if val == "1"
     }
     regions: dict[complex, int] = {}
@@ -37,10 +37,6 @@ def part2(data: str):
                     todo.append(n_pos)
 
     return len(Counter(regions.values()))
-
-
-def to_bin(hex_str: str):
-    return (bin(int(hex_str, 16))[2:]).rjust(128, "0")
 
 
 def neighbors(pos: complex):
