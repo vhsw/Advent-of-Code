@@ -1,0 +1,29 @@
+{
+    "display grid": {
+        "prefix": "display",
+        "body": [
+            "def display(grid, size=10):",
+            "    for row in range(size):",
+            "        for col in range(size):",
+            "            print(grid[complex(row, col)], end=\"\")",
+            "            print()",
+            "    print()"
+        ],
+    },
+    "neighbors8": {
+        "prefix": "neighbors8",
+        "body": [
+            "def neighbors(pos: complex):",
+            "    for d_pos in (1, 1j, -1, -1j, 1 + 1j, 1 - 1j, -1 + 1j, -1 - 1j):",
+            "        yield pos + d_pos"
+        ],
+    },
+    "neighbors4": {
+        "prefix": "neighbors4",
+        "body": [
+            "def neighbors(pos: complex):",
+            "    for d_pos in (1, 1j, -1, -1j):",
+            "        yield pos + d_pos"
+        ],
+    },
+}
