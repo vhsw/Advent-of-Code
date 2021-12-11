@@ -1,4 +1,10 @@
-// Day 15: Dueling Generators
+/* Day 15: Dueling Generators
+
+gcc "2017/Day 15/dueling_generators.c" \
+   -fPIC -shared -Ofast \
+   -o "2017/Day 15/libdueling_generators.so"
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -26,17 +32,13 @@ int part2(long gen_a, long gen_b)
     int total = 0;
     for (int i = 0; i < 5000000; i++)
     {
-        gen_a = (gen_a * FACTOR_A) % MOD;
-        while (gen_a % 4)
-        {
+        do
             gen_a = (gen_a * FACTOR_A) % MOD;
-        }
+        while (gen_a % 4);
 
-        gen_b = (gen_b * FACTOR_B) % MOD;
-        while (gen_b % 8)
-        {
+        do
             gen_b = (gen_b * FACTOR_B) % MOD;
-        }
+        while (gen_b % 8);
 
         if ((gen_a & 0xFFFF) == (gen_b & 0xFFFF))
         {
