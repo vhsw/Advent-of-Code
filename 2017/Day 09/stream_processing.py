@@ -26,7 +26,7 @@ def part1(data):
                 case "{":
                     level += 1
                     score += level
-                case "}" :
+                case "}":
                     assert level > 0
                     level -= 1
     return score
@@ -56,10 +56,11 @@ def part2(data):
                     garbage = True
                 case "{":
                     level += 1
-                case "}" :
+                case "}":
                     assert level > 0
                     level -= 1
     return characters
+
 
 if __name__ == "__main__":
     print(f"Part 1: { part1(DATA) }")

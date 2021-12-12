@@ -9,7 +9,7 @@ def part1(data: str, size=16):
     """Part 1 solution"""
     programs = list(ascii_lowercase[:size])
     execute(data.split(","), programs)
-    return ''.join(programs)
+    return "".join(programs)
 
 
 def part2(data: str, size=16):
@@ -23,7 +23,8 @@ def part2(data: str, size=16):
             break
         seen.append(programs.copy())
 
-    return ''.join(seen[1000000000%len(seen)])
+    return "".join(seen[1000000000 % len(seen)])
+
 
 def execute(cmds, programs):
     for cmd in cmds:
@@ -32,10 +33,10 @@ def execute(cmds, programs):
                 dist = -int(cmd[1:])
                 programs[:] = programs[dist:] + programs[:dist]
             case "x":
-                pos_a, pos_b = map(int, cmd[1:].split('/'))
+                pos_a, pos_b = map(int, cmd[1:].split("/"))
                 programs[pos_a], programs[pos_b] = programs[pos_b], programs[pos_a]
             case "p":
-                pos_a, pos_b = map(programs.index, cmd[1:].split('/'))
+                pos_a, pos_b = map(programs.index, cmd[1:].split("/"))
                 programs[pos_a], programs[pos_b] = programs[pos_b], programs[pos_a]
 
 

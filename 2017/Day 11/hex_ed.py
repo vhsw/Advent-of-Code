@@ -18,9 +18,9 @@ def part1(data: str):
             case "se":
                 pos += 1j
             case "ne":
-                pos -= 1-1j
+                pos -= 1 - 1j
             case "sw":
-                pos += 1-1j
+                pos += 1 - 1j
 
     return distance(pos)
 
@@ -40,18 +40,19 @@ def part2(data: str):
             case "se":
                 pos += 1j
             case "ne":
-                pos -= 1-1j
+                pos -= 1 - 1j
             case "sw":
-                pos += 1-1j
+                pos += 1 - 1j
         max_dist = max(max_dist, distance(pos))
 
     return max_dist
 
+
 def distance(pos: complex):
     r = pos.real
     q = pos.imag
-    s = -pos.imag-pos.real
-    return int(max(map(abs, [r,q,s])))
+    s = -pos.imag - pos.real
+    return int(max(map(abs, [r, q, s])))
 
 
 if __name__ == "__main__":
