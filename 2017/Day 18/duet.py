@@ -75,20 +75,17 @@ def part2(data: str):
                 case "rcv" if arg != "0":
                     if not rx:
                         yield "WAIT"
+                    if not rx:
+                        return
                     val = rx.popleft()
                     reg[arg] = val
                 case "jgz" if value(arg) > 0:
                     ip += value(rest[0]) - 1
             ip += 1
 
-    gen_0 = evaluate(0, q_0, q_1, feed)
-    gen_1 = evaluate(1, q_1, q_0, feed)
-    while True:
-        try:
-            next(gen_0)
-            next(gen_1)
-        except IndexError:
-            return count
+    for _ in zip(evaluate(0, q_0, q_1, feed), evaluate(1, q_1, q_0, feed)):
+        pass
+    return count
 
 
 if __name__ == "__main__":
