@@ -6,7 +6,7 @@
             "    for row in range(size):",
             "        for col in range(size):",
             "            print(grid[complex(row, col)], end=\"\")",
-            "            print()",
+            "        print()",
             "    print()"
         ],
     },
