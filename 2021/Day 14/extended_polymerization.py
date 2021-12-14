@@ -32,7 +32,7 @@ def parse(rules_str: str):
 
 
 def polymerize(template: str, rules: dict[str, str], steps: int):
-    pair_counts = Counter((a, b) for a, b in zip(template, template[1:]))
+    pair_counts = Counter(zip(template, template[1:]))
     letter_counts = Counter(template)
     for _ in range(steps):
         new_pair_counts: Counter[tuple[str, str]] = Counter()
