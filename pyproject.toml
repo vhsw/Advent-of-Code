@@ -33,3 +33,6 @@ disable = ["missing-function-docstring", "import-error"]
 
 [tool.pytest.ini_options]
 addopts = "-x"
+
+[tool.mypy]
+plugins = "numpy.typing.mypy_plugin"
