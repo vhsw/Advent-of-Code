@@ -24,7 +24,7 @@ def part2(data: str):
 
 
 def parse(rules_str: str):
-    rules = {}
+    rules: dict[str, str] = {}
     for line in rules_str.splitlines():
         pair, element = line.split(" -> ")
         rules[pair] = element
