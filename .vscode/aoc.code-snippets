@@ -1,8 +1,9 @@
 {
-    "display grid": {
-        "prefix": "display",
+    "display grid dict": {
+        "scope": "python",
+        "prefix": "display/dict",
         "body": [
-            "def display(grid, size=10):",
+            "def display(grid: dict[complex, str], size:int = 10):",
             "    for row in range(size):",
             "        for col in range(size):",
             "            print(grid[complex(row, col)], end=\"\")",
@@ -10,7 +11,23 @@
             "    print()"
         ],
     },
+    "display grid set": {
+        "scope": "python",
+        "prefix": "display/set",
+        "body": [
+            "def display(grid: set[complex]):",
+            "    mr = int(max(g.imag for g in grid)) + 1",
+            "    mc = int(max(g.real for g in grid)) + 1",
+            "    for row in range(mr):",
+            "        for col in range(mc):",
+            "            char = \"#\" if complex(col, row) in grid else \".\"",
+            "            print(char, end=\"\")",
+            "        print()",
+            "    print()"
+        ],
+    },
     "neighbors8": {
+        "scope": "python",
         "prefix": "neighbors8",
         "body": [
             "def neighbors(pos: complex):",
@@ -19,6 +36,7 @@
         ],
     },
     "neighbors4": {
+        "scope": "python",
         "prefix": "neighbors4",
         "body": [
             "def neighbors(pos: complex):",
