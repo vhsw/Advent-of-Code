@@ -21,7 +21,7 @@ def part1(data: str, steps=10000):
     direction = -1j
     infected = 0
     for _ in range(steps):
-        if grid.get(node) == States.INFECTED:
+        if node in grid:
             direction *= 1j
             grid.pop(node)
         else:
@@ -51,7 +51,7 @@ def part2(data: str, steps=10000000):
                 grid[node] = States.FLAGGED
                 direction *= 1j
             case States.FLAGGED:
-                grid[node] = States.CLEAN
+                grid.pop(node, None)
                 direction *= -1
         node += direction
     return infected
