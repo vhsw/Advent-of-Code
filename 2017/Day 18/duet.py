@@ -1,7 +1,6 @@
 """Day 18: Duet"""
 from collections import deque
 from string import ascii_lowercase
-from typing import Callable
 
 with open("2017/Day 18/input.txt", encoding="utf-8") as fp:
     DATA = fp.read().strip()
@@ -32,10 +31,14 @@ def part1(data: str):
                 reg[arg] *= value(rest[0])
             case "mod":
                 reg[arg] %= value(rest[0])
-            case "rcv" if arg != "0":
-                return played
-            case "jgz" if reg[arg] > 0:
-                ip += value(rest[0]) - 1
+            case "rcv":
+                if arg != "0":
+                    return played
+            case "jgz":
+                if value(arg) > 0:
+                    ip += value(rest[0]) - 1
+            case unknown:
+                raise ValueError(unknown)
         ip += 1
     return played
 
@@ -80,15 +83,20 @@ def evaluate(
                 reg[arg] *= value(rest[0])
             case "mod":
                 reg[arg] %= value(rest[0])
-            case "rcv" if arg != "0":
+            case "rcv":
+                if arg == "0":
+                    ip += 1
+                    continue
+
                 if not rx:
                     yield 0
                 if not rx:
                     return
                 val = rx.popleft()
                 reg[arg] = val
-            case "jgz" if value(arg) > 0:
-                ip += value(rest[0]) - 1
+            case "jgz":
+                if value(arg) > 0:
+                    ip += value(rest[0]) - 1
         ip += 1
 
 
