@@ -1,4 +1,5 @@
 """Day 24: Arithmetic Logic Unit"""
+from functools import cache
 
 with open("2021/Day 24/input.txt", encoding="utf-8") as fp:
     DATA = fp.read().strip()
@@ -43,33 +44,29 @@ def part2(data: str):
                 todo.append((part + 1, result, path + (num,)))
 
 
+@cache
 def run(code: str, data: int, z: int = 0):
     reg = {"w": data, "x": 0, "y": 0, "z": z}
 
     def value(arg):
-        if arg in reg:
+        try:
             return reg[arg]
-        return int(arg)
+        except KeyError:
+            return int(arg)
 
     for line in code.splitlines():
         opcode, a, b = line.split()
         match opcode:
             case "add":
-                val = value(b)
                 reg[a] += value(b)
             case "mul":
                 reg[a] *= value(b)
             case "div":
-                val = value(b)
-                assert val != 0
-                reg[a] //= val
+                reg[a] //= value(b)
             case "mod":
-                val = value(b)
-                assert val > 0
-                assert reg[a] >= 0
                 reg[a] %= value(b)
             case "eql":
-                reg[a] = 1 if value(a) == value(b) else 0
+                reg[a] = 1 * value(a) == value(b)
     return reg["z"]
 
 
