@@ -21,4 +21,4 @@ def test_part1():
 def test_part2():
     """Part 2 test"""
     assert part2(EXAMPLE) == 3351
-    assert part2(DATA) == 0
+    assert part2(DATA) == 16389

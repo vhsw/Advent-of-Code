@@ -21,7 +21,7 @@ def cmpf(a, b):
     return 0
 
 
-@dataclass
+@dataclass(frozen=True)
 class Vector:
     x: int
     y: int
