@@ -410,7 +410,7 @@ requests = "^2.28.1"
 type = "git"
 url = "git@github.com:vhsw/libadvent.git"
 reference = "v2022.11.26"
-resolved_reference = "0c4b9a5de888a3cd309e76564a7bc092fb8acfeb"
+resolved_reference = "9940867461fa59d7e347ee3b113519f51e17e862"
 
 [[package]]
 name = "lxml"
