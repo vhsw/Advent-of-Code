@@ -7,7 +7,7 @@ EXAMPLE = "10"
 def test_part1():
     """Part 1 test"""
     assert part1(EXAMPLE, target=7 + 4j) == 11
-    assert part1(DATA) == 0
+    assert part1(DATA) == 92
 
 
 def test_part2():
