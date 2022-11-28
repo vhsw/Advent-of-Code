@@ -25,7 +25,6 @@ def run(regs: dict[str, int], code: list[tuple[str, ...]]):
     ip = 0
     max_ip = len(code)
     while ip < max_ip:
-        # print(ip, code[ip], regs)
         match code[ip]:
             case ("cpy", x, y):
                 regs[y] = regs[x] if x in regs else int(x)
