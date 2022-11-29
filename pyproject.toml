@@ -30,3 +30,4 @@ disable = ["missing-class-docstring", "missing-function-docstring", "import-erro
 
 [tool.mypy]
 plugins = "numpy.typing.mypy_plugin"
+check_untyped_defs = true
