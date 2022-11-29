@@ -25,8 +25,12 @@ build-backend = "poetry.masonry.api"
 
 [tool.pylint]
 [tool.pylint.basic]
-good-names = ["df", "fp", "ex", "ip", "x", "y", "dx", "dy", "dz", "dw"]
-disable = ["missing-class-docstring", "missing-function-docstring", "import-error"]
+disable = [
+    "missing-class-docstring",
+    "missing-function-docstring",
+    "import-error",
+    "invalid-name",
+]
 
 [tool.mypy]
 plugins = "numpy.typing.mypy_plugin"
