@@ -37,7 +37,6 @@ def run(regs: dict[str, int], code: list[tuple[str, ...]]):
             case _:
                 raise ValueError(code[ip])
         ip += 1
-    return regs
 
 
 def get(regs: dict[str, int], x):
