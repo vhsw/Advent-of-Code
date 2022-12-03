@@ -21,8 +21,6 @@ def part2(data: str):
     score = 0
     for i in range(0, len(lines), 3):
         diff = set(lines[i]) & set(lines[i + 1]) & set(lines[i + 2])
-        if len(diff) != 1:
-            continue
         d = diff.pop()
         score += priority(d)
 
