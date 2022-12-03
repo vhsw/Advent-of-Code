@@ -8,9 +8,9 @@ Solved puzzles from [Advent of Code](https://adventofcode.com) :christmas_tree:
 - 2021: 50 :star2:
 - 2020: 50 :star2:
 - 2019: 50 :star2:
-- 2018: 44 :star:
+- 2018: 46 :star:
 - 2017: 50 :star2:
 - 2016: 50 :star2:
 - 2015: 46 :star:
 
-Total stars: 346 :star:
+Total stars: 348 :star:
