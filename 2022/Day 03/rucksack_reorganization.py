@@ -30,8 +30,7 @@ def part2(data: str):
 def priority(d: str):
     if "a" <= d <= "z":
         return ord(d) - ord("a") + 1
-    else:
-        return ord(d) - ord("A") + 27
+    return ord(d) - ord("A") + 27
 
 
 if __name__ == "__main__":
