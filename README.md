@@ -11,6 +11,6 @@ Solved puzzles from [Advent of Code](https://adventofcode.com) :christmas_tree:
 - 2018: 50 :star2:
 - 2017: 50 :star2:
 - 2016: 50 :star2:
-- 2015: 47 :star:
+- 2015: 50 :star2:
 
-Total stars: 357 :star:
+Total stars: 360 :star:
