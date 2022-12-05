@@ -54,12 +54,9 @@ def part2(data: str):
             if new_molecule != molecule:
                 todo.append((new_molecule, steps + 1))
         for src, dst in other_rules.items():
-            new_molecules = []
             for idx in find_all(molecule, src):
                 new_molecule = molecule[:idx] + dst + molecule[idx + len(src) :]
-                new_molecules.append((new_molecule, steps + 1))
-            new_molecules.sort(key=lambda i: len(i[0]))
-            todo.extend(new_molecules)
+                todo.append((new_molecule, steps + 1))
 
 
 def split_rules(rules):
