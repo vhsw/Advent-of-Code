@@ -19,4 +19,4 @@ def test_part2():
     assert part2("nppdvjthqldpwncqszvftbrmjlhg") == 23
     assert part2("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg") == 29
     assert part2("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw") == 26
-    assert part2(DATA) == 0
+    assert part2(DATA) == 2773
