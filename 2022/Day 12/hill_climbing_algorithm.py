@@ -48,12 +48,13 @@ def parse(data: str):
 
 def build_graph(grid: dict[complex, str]):
     G = nx.DiGraph()
-    for src, char in grid.items():
+    for src, src_elevation in grid.items():
         for d_pos in (1, -1, -1j, 1j):
             dst = src + d_pos
-            if dst not in grid:
+            dst_elevation = grid.get(dst)
+            if not dst_elevation:
                 continue
-            if ord(grid[dst]) - ord(char) > 1:
+            if ord(dst_elevation) - ord(src_elevation) > 1:
                 continue
             G.add_edge(src, dst)
     return G
