@@ -4,7 +4,7 @@ Solved puzzles from [Advent of Code](https://adventofcode.com) :christmas_tree:
 
 ## Statistics
 
-- 2022: 26 :star:
+- 2022: 28 :star:
 - 2021: 50 :star2:
 - 2020: 50 :star2:
 - 2019: 50 :star2:
@@ -13,4 +13,4 @@ Solved puzzles from [Advent of Code](https://adventofcode.com) :christmas_tree:
 - 2016: 50 :star2:
 - 2015: 50 :star2:
 
-Total stars: 376 :star:
+Total stars: 378 :star:
