@@ -62,12 +62,12 @@ def intervals_on_line(sensors, radii, line):
 def merge(intervals: list[tuple[int, int]]):
     intervals = sorted(intervals)
     stack = [intervals[0]]
-    for rule in intervals[1:]:
-        last_rule = stack[-1]
-        if last_rule[0] <= rule[0] <= last_rule[1]:
-            stack[-1] = (last_rule[0], max(last_rule[1], rule[1]))
+    for interval in intervals[1:]:
+        last = stack[-1]
+        if last[0] <= interval[0] <= last[1]:
+            stack[-1] = (last[0], max(last[1], interval[1]))
         else:
-            stack.append(rule)
+            stack.append(interval)
     return stack
 
 
