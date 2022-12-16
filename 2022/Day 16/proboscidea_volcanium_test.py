@@ -18,10 +18,10 @@ Valve JJ has flow rate=21; tunnel leads to valve II
 def test_part1():
     """Part 1 test"""
     assert part1(EXAMPLE) == 1651
-    assert part1(DATA) == 0
+    assert part1(DATA) == 2114
 
 
 def test_part2():
     """Part 2 test"""
-    assert part2(EXAMPLE) == 0
-    assert part2(DATA) == 0
+    assert part2(EXAMPLE) == 1707
+    assert part2(DATA) == 2666
