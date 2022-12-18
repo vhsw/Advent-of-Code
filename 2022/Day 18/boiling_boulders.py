@@ -7,7 +7,7 @@ with open("2022/Day 18/input.txt", encoding="utf-8") as fp:
 def part1(data: str):
     """Part 1 solution"""
     cubes = parse(data)
-    return sum(6 - sum(n in cubes for n in neighbors(cube)) for cube in cubes)
+    return sum(6 - len(cubes & set(neighbors(cube))) for cube in cubes)
 
 
 def part2(data: str):
@@ -24,7 +24,7 @@ def part2(data: str):
         water.add(item)
         todo.extend(neighbors(item))
 
-    return sum(sum(n in water for n in neighbors(cube)) for cube in cubes)
+    return sum(len(water & set(neighbors(cube))) for cube in cubes)
 
 
 def parse(data: str):
