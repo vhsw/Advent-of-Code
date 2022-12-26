@@ -9,11 +9,6 @@ def part1(data: str):
     return make_snafu(sum(nums))
 
 
-def part2(data: str):
-    """Part 2 solution"""
-    return
-
-
 def parse(data: str):
     return [parse_snafu(line) for line in data.splitlines()]
 
@@ -60,4 +55,3 @@ def make_snafu(n: int):
 
 if __name__ == "__main__":
     print(f"Part 1: { part1(DATA) }")
-    print(f"Part 2: { part2(DATA) }")
