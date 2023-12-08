@@ -12,8 +12,8 @@ def part1(data: str):
     """Part 1 solution"""
     instructions, nodes = parse(data)
 
-    def is_dst(src: str):
-        return src == "ZZZ"
+    def is_dst(node: str):
+        return node == "ZZZ"
 
     return count_steps(instructions, nodes, "AAA", is_dst)
 
@@ -23,8 +23,8 @@ def part2(data: str):
     instructions, nodes = parse(data)
     starts = [node for node in nodes if node.endswith("A")]
 
-    def is_dst(src: str):
-        return src.endswith("Z")
+    def is_dst(node: str):
+        return node.endswith("Z")
 
     return lcm(*(count_steps(instructions, nodes, src, is_dst) for src in starts))
 
