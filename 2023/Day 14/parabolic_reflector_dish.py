@@ -28,6 +28,7 @@ def part2(data: str):
                     return reflector.load_on_north
         history[frozen_rocks] = cycle
         reflector.cycle()
+    return reflector.load_on_north
 
 
 @dataclass
