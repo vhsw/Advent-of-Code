@@ -25,7 +25,8 @@ def part2(data: str):
             for rocks, cycle_no in history.items():
                 if cycle_no == final_cycle:
                     reflector.rocks = rocks
-                    return reflector.load_on_north
+                    break
+            break
         history[frozen_rocks] = cycle
         reflector.cycle()
     return reflector.load_on_north
