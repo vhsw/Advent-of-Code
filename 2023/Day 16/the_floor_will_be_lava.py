@@ -112,9 +112,9 @@ class Contraption:
             if item is None:
                 continue
             seen.add(ray)
-            for new_dir in item.interact(ray.dir):
-                new_ray = Ray(ray.pos + new_dir, new_dir)
-                todo.append(new_ray)
+            todo.extend(
+                Ray(ray.pos + new_dir, new_dir) for new_dir in item.interact(ray.dir)
+            )
         return len({ray.pos for ray in seen})
 
     def edge_rays(self):
