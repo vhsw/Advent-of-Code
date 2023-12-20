@@ -22,10 +22,10 @@ def part1(data: str):
 def part2(data: str):
     """Part 2 solution"""
     workflows, _ = parse(data)
-    part = Part(*(Interval(MIN_ATTR, MAX_ATTR) for _ in "xmas"))
+    part = Part(*(Interval(MIN_ATTR, MAX_ATTR + 1) for _ in "xmas"))
     parts = execute(workflows, part)
     return sum(
-        prod(interval.end - interval.start + 1 for interval in part) for part in parts
+        prod(interval.end - interval.start for interval in part) for part in parts
     )
 
 
@@ -41,9 +41,10 @@ class Interval(NamedTuple):
     def __and__(self, other: "Interval"):
         start = max(self.start, other.start)
         end = min(self.end, other.end)
-        if (end - start) < 0:
-            return None
         return self.__class__(start, end)
+
+    def __bool__(self):
+        return (self.end - self.start) > 0
 
 
 class Part(NamedTuple):
@@ -58,7 +59,7 @@ class Part(NamedTuple):
         for item in line.strip(r"{}").split(","):
             k, v = item.split("=")
             value = int(v)
-            items[k] = Interval(value, value)
+            items[k] = Interval(value, value + 1)
         return cls(**items)
 
     def __or__(self, new_data: dict[str, Interval]):
@@ -80,9 +81,9 @@ class Rule(NamedTuple):
         condition, step = rule.split(":")
         value = int(condition[2:])
         interval = (
-            Interval(value + 1, MAX_ATTR)
+            Interval(value + 1, MAX_ATTR + 1)
             if condition[1] == ">"
-            else Interval(MIN_ATTR, value - 1)
+            else Interval(MIN_ATTR, value)
         )
         return cls(
             attr=condition[0],
@@ -110,14 +111,10 @@ class Rules:
             interval: Interval = getattr(part, rule.attr)
             if overlap := rule.interval & interval:
                 yield rule.step, part | {rule.attr: overlap}
-                if interval.start < overlap.start:
-                    yield self.name, part | {
-                        rule.attr: Interval(interval.start, overlap.start - 1)
-                    }
-                if interval.end > overlap.end:
-                    yield self.name, part | {
-                        rule.attr: Interval(overlap.end + 1, interval.end)
-                    }
+                if before := Interval(interval.start, overlap.start):
+                    yield self.name, part | {rule.attr: before}
+                if after := Interval(overlap.end, interval.end):
+                    yield self.name, part | {rule.attr: after}
                 break
         else:
             yield self.default, part
