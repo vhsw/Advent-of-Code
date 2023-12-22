@@ -14,7 +14,7 @@ def test_part1():
     assert part1(DATA) == 1312850
 
 
-@pytest.mark.skip  # slow
+@pytest.mark.slow
 def test_part2():
     """Part 2 test"""
     assert part2(EXAMPLE) == 71503
