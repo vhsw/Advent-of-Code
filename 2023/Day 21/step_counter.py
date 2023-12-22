@@ -16,7 +16,7 @@ def part1(data: str, steps=64):
 def part2(data: str, steps=26501365):
     """Part 2 solution"""
     maze = Maze.from_str(data, repeats_infinitely=True)
-    if steps <= 500:
+    if steps <= 5000:
         return count_reachable(maze, steps)
     X = [int(maze.start.real) + maze.side * i for i in range(3)]
     Y = [count_reachable(maze, x) for x in X]
