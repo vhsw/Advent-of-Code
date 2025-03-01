@@ -42,7 +42,6 @@ fn find_xmas(grid: &Vec<Vec<char>>, row: usize, col: usize) -> usize {
 
     // South
     if col < grid[row].len() - 3 {
-        // dbg!(grid[row][col]);
         if (1..4).all(|i| grid[row][col + i] == target[i]) {
             count += 1;
         }
