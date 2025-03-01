@@ -44,10 +44,9 @@ fn read_updates(data: &String) -> Vec<Vec<usize>> {
     return updates;
 }
 fn is_correct_order(update: &Vec<usize>, rules: &Vec<(usize, usize)>) -> bool {
-    for rule in rules {
-        let (before, after) = rule;
-        let before_idx = update.iter().position(|&x| x == *before);
-        let after_idx = update.iter().position(|&x| x == *after);
+    for (before, after) in rules {
+        let before_idx = update.iter().position(|x| x == before);
+        let after_idx = update.iter().position(|x| x == after);
         if before_idx.is_none() || after_idx.is_none() {
             continue;
         }
@@ -61,10 +60,9 @@ fn fix_order(update: Vec<usize>, rules: &Vec<(usize, usize)>) -> Vec<usize> {
     let mut update = update.clone();
     // YOLO
     while !is_correct_order(&update, rules) {
-        for rule in rules {
-            let (before, after) = rule;
-            let before_idx = update.iter().position(|&x| x == *before);
-            let after_idx = update.iter().position(|&x| x == *after);
+        for (before, after) in rules {
+            let before_idx = update.iter().position(|x| x == before);
+            let after_idx = update.iter().position(|x| x == after);
             if before_idx.is_none() || after_idx.is_none() {
                 continue;
             }
