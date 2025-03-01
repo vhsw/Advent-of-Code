@@ -17,9 +17,8 @@ fn part_1(data: &String) -> i32 {
         .sum();
 }
 fn part_2(data: &String) -> i32 {
-    let padded = "do()".to_string() + data;
     let mut sum = 0;
-    for chunk in padded.split("do()") {
+    for chunk in data.split("do()") {
         for enabled in chunk.split("don't()") {
             sum += part_1(&enabled.to_string());
             break;
