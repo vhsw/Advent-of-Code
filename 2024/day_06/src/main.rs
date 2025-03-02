@@ -7,11 +7,39 @@ fn main() {
 }
 fn part_1(data: &String) -> usize {
     let grid = make_grid(data);
-    let (mut guard_pos, mut guard_dir) = find_guard(&grid);
+    let (pos, dir) = find_guard(&grid);
+    let path = find_path(pos, dir, &grid);
+    path.len()
+}
+fn part_2(data: &String) -> usize {
+    let grid = make_grid(data);
+    let (pos, dir) = find_guard(&grid);
+    let path = find_path(pos, dir, &grid);
+
+    let mut count = 0;
+    for (row, col) in path.iter() {
+        if *row == pos.0 && *col == pos.1 {
+            continue;
+        }
+        let mut new_grid = grid.clone();
+        new_grid[*row as usize][*col as usize] = '#';
+        if will_stuck(pos, dir, &new_grid) {
+            count += 1;
+        }
+    }
+    count
+}
+fn find_path(
+    pos: (isize, isize),
+    dir: (isize, isize),
+    grid: &Vec<Vec<char>>,
+) -> HashSet<(isize, isize)> {
+    let mut pos = pos;
+    let mut dir = dir;
     let mut seen = HashSet::new();
     loop {
-        seen.insert(guard_pos);
-        let new_pos = (guard_pos.0 + guard_dir.0, guard_pos.1 + guard_dir.1);
+        seen.insert(pos);
+        let new_pos = (pos.0 + dir.0, pos.1 + dir.1);
         if new_pos.0 < 0
             || new_pos.1 < 0
             || new_pos.0 >= grid.len() as isize
@@ -20,30 +48,12 @@ fn part_1(data: &String) -> usize {
             break;
         }
         if grid[new_pos.0 as usize][new_pos.1 as usize] == '#' {
-            guard_dir = (guard_dir.1, -guard_dir.0);
+            dir = (dir.1, -dir.0);
             continue;
         }
-        guard_pos = new_pos;
+        pos = new_pos;
     }
-    seen.len()
-}
-fn part_2(data: &String) -> usize {
-    let grid = make_grid(data);
-    let (guard_pos, guard_dir) = find_guard(&grid);
-    let mut count = 0;
-    for row in 0..grid.len() {
-        for col in 0..grid[row].len() {
-            if row == guard_pos.0 as usize && col == guard_pos.1 as usize {
-                continue;
-            }
-            let mut new_grid = grid.clone();
-            new_grid[row][col] = '#';
-            if will_stuck(guard_pos, guard_dir, &new_grid) {
-                count += 1;
-            }
-        }
-    }
-    count
+    seen
 }
 fn will_stuck(pos: (isize, isize), dir: (isize, isize), grid: &Vec<Vec<char>>) -> bool {
     let mut pos = pos;
