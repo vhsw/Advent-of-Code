@@ -6,13 +6,13 @@ fn main() {
     println!("Part 2: {}", part_2(&data));
 }
 
-fn part_1(data: &String) -> usize {
+fn part_1(data: &str) -> usize {
     let reports = get_reports(data);
-    return reports.iter().filter(|report| is_safe(report)).count();
+    reports.iter().filter(|report| is_safe(report)).count()
 }
-fn part_2(data: &String) -> usize {
+fn part_2(data: &str) -> usize {
     let reports = get_reports(data);
-    return reports
+    reports
         .iter()
         .filter(|report| {
             for idx in 0..report.len() {
@@ -21,11 +21,11 @@ fn part_2(data: &String) -> usize {
                     return true;
                 };
             }
-            return false;
+            false
         })
-        .count();
+        .count()
 }
-fn get_reports(data: &String) -> Vec<Vec<u32>> {
+fn get_reports(data: &str) -> Vec<Vec<u32>> {
     let mut reports = Vec::new();
     for line in data.lines() {
         reports.push(
@@ -34,12 +34,12 @@ fn get_reports(data: &String) -> Vec<Vec<u32>> {
                 .collect(),
         );
     }
-    return reports;
+    reports
 }
-fn is_safe(report: &Vec<u32>) -> bool {
-    return (all_decreasing(report) || all_increasing(report)) && adj_diff_is_good(report);
+fn is_safe(report: &[u32]) -> bool {
+    (all_decreasing(report) || all_increasing(report)) && adj_diff_is_good(report)
 }
-fn all_increasing(report: &Vec<u32>) -> bool {
+fn all_increasing(report: &[u32]) -> bool {
     if report.len() < 2 {
         return true;
     }
@@ -48,9 +48,9 @@ fn all_increasing(report: &Vec<u32>) -> bool {
             return false;
         };
     }
-    return true;
+    true
 }
-fn all_decreasing(report: &Vec<u32>) -> bool {
+fn all_decreasing(report: &[u32]) -> bool {
     if report.len() < 2 {
         return true;
     }
@@ -59,26 +59,35 @@ fn all_decreasing(report: &Vec<u32>) -> bool {
             return false;
         };
     }
-    return true;
+    true
 }
-fn adj_diff_is_good(report: &Vec<u32>) -> bool {
+fn adj_diff_is_good(report: &[u32]) -> bool {
     if report.len() < 2 {
         return true;
     }
     for (prev, val) in report.iter().zip(report[1..].iter()) {
         let diff = prev.abs_diff(*val);
-        if diff > 3 || diff < 1 {
+        if !(1..=3).contains(&diff) {
             return false;
         };
     }
-    return true;
+    true
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn test_part_1() {
+        assert_eq!(part_1(&example()), 2);
+    }
+    #[test]
+    fn test_part_2() {
+        assert_eq!(part_2(&example()), 4);
+    }
     fn example() -> String {
-        return String::from(
+        String::from(
             "
             7 6 4 2 1
             1 2 7 8 9
@@ -91,15 +100,6 @@ mod tests {
         )
         .lines()
         .map(|line| line.trim().to_string() + "\n")
-        .collect();
-    }
-
-    #[test]
-    fn test_part_1() {
-        assert_eq!(part_1(&example()), 2);
-    }
-    #[test]
-    fn test_part_2() {
-        assert_eq!(part_2(&example()), 4);
+        .collect()
     }
 }

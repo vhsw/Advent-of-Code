@@ -5,15 +5,17 @@ fn main() {
     println!("Part 1: {}", part_1(&data));
     println!("Part 2: {}", part_2(&data));
 }
-fn part_1(data: &String) -> usize {
+fn part_1(data: &str) -> usize {
     let grid = make_grid(data);
-    let (pos, dir) = find_guard(&grid);
+    let pos = find_guard(&grid);
+    let dir = (-1, 0);
     let path = find_path(pos, dir, &grid);
     path.len()
 }
-fn part_2(data: &String) -> usize {
+fn part_2(data: &str) -> usize {
     let grid = make_grid(data);
-    let (pos, dir) = find_guard(&grid);
+    let pos = find_guard(&grid);
+    let dir = (-1, 0);
     let path = find_path(pos, dir, &grid);
 
     let mut count = 0;
@@ -32,7 +34,7 @@ fn part_2(data: &String) -> usize {
 fn find_path(
     pos: (isize, isize),
     dir: (isize, isize),
-    grid: &Vec<Vec<char>>,
+    grid: &[Vec<char>],
 ) -> HashSet<(isize, isize)> {
     let mut pos = pos;
     let mut dir = dir;
@@ -55,7 +57,7 @@ fn find_path(
     }
     seen
 }
-fn will_stuck(pos: (isize, isize), dir: (isize, isize), grid: &Vec<Vec<char>>) -> bool {
+fn will_stuck(pos: (isize, isize), dir: (isize, isize), grid: &[Vec<char>]) -> bool {
     let mut pos = pos;
     let mut dir = dir;
     let mut seen = HashSet::new();
@@ -80,7 +82,7 @@ fn will_stuck(pos: (isize, isize), dir: (isize, isize), grid: &Vec<Vec<char>>) -
     }
 }
 
-fn make_grid(data: &String) -> Vec<Vec<char>> {
+fn make_grid(data: &str) -> Vec<Vec<char>> {
     let mut grid: Vec<Vec<char>> = Vec::new();
     for line in data.lines() {
         let chars = line.chars().collect();
@@ -88,19 +90,16 @@ fn make_grid(data: &String) -> Vec<Vec<char>> {
     }
     grid
 }
-fn find_guard(grid: &Vec<Vec<char>>) -> ((isize, isize), (isize, isize)) {
-    for row in 0..grid.len() {
-        for col in 0..grid[row].len() {
-            match grid[row][col] {
-                '^' => return ((row as isize, col as isize), (-1, 0)),
-                'v' => return ((row as isize, col as isize), (1, 0)),
-                '>' => return ((row as isize, col as isize), (0, 1)),
-                '<' => return ((row as isize, col as isize), (0, -1)),
-                _ => continue,
-            }
-        }
-    }
-    panic!("Guard not found")
+fn find_guard(grid: &[Vec<char>]) -> (isize, isize) {
+    grid.iter()
+        .enumerate()
+        .find_map(|(i, row)| {
+            row.iter().enumerate().find_map(|(j, &c)| match c {
+                '^' => Some((i as isize, j as isize)),
+                _ => None,
+            })
+        })
+        .unwrap()
 }
 #[cfg(test)]
 mod tests {
@@ -115,7 +114,7 @@ mod tests {
         assert_eq!(part_2(&example()), 6);
     }
     fn example() -> String {
-        return String::from(
+        String::from(
             "
             ....#.....
             .........#
@@ -132,6 +131,6 @@ mod tests {
         )
         .lines()
         .map(|line| line.trim().to_string() + "\n")
-        .collect();
+        .collect()
     }
 }

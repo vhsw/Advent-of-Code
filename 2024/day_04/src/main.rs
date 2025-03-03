@@ -5,7 +5,7 @@ fn main() {
     println!("Part 1: {}", part_1(&data));
     println!("Part 2: {}", part_2(&data));
 }
-fn part_1(data: &String) -> usize {
+fn part_1(data: &str) -> usize {
     let grid = make_grid(data);
     let mut count = 0;
     for row in 0..grid.len() {
@@ -13,9 +13,9 @@ fn part_1(data: &String) -> usize {
             count += find_xmas(&grid, row, col)
         }
     }
-    return count;
+    count
 }
-fn part_2(data: &String) -> usize {
+fn part_2(data: &str) -> usize {
     let grid = make_grid(data);
     let mut count = 0;
     for row in 0..grid.len() {
@@ -23,17 +23,17 @@ fn part_2(data: &String) -> usize {
             count += find_x_mas(&grid, row, col)
         }
     }
-    return count;
+    count
 }
-fn make_grid(data: &String) -> Vec<Vec<char>> {
+fn make_grid(data: &str) -> Vec<Vec<char>> {
     let mut grid: Vec<Vec<char>> = Vec::new();
     for line in data.lines() {
         let chars = line.chars().collect();
         grid.push(chars);
     }
-    return grid;
+    grid
 }
-fn find_xmas(grid: &Vec<Vec<char>>, row: usize, col: usize) -> usize {
+fn find_xmas(grid: &[Vec<char>], row: usize, col: usize) -> usize {
     let target: Vec<char> = "XMAS".chars().collect();
     let mut count = 0;
     if grid[row][col] != target[0] {
@@ -41,56 +41,43 @@ fn find_xmas(grid: &Vec<Vec<char>>, row: usize, col: usize) -> usize {
     }
 
     // South
-    if col < grid[row].len() - 3 {
-        if (1..4).all(|i| grid[row][col + i] == target[i]) {
-            count += 1;
-        }
+    if col < grid[row].len() - 3 && (1..4).all(|i| grid[row][col + i] == target[i]) {
+        count += 1;
     }
     // North
-    if col > 2 {
-        if (1..4).all(|i| grid[row][col - i] == target[i]) {
-            count += 1;
-        }
+    if col > 2 && (1..4).all(|i| grid[row][col - i] == target[i]) {
+        count += 1;
     }
     // East
-    if row < grid.len() - 3 {
-        if (1..4).all(|i| grid[row + i][col] == target[i]) {
-            count += 1;
-        }
+    if row < grid.len() - 3 && (1..4).all(|i| grid[row + i][col] == target[i]) {
+        count += 1;
     }
     // West
-    if row > 2 {
-        if (1..4).all(|i| grid[row - i][col] == target[i]) {
-            count += 1;
-        }
+    if row > 2 && (1..4).all(|i| grid[row - i][col] == target[i]) {
+        count += 1;
     }
     // South-East
-    if row < grid.len() - 3 && col < grid[row].len() - 3 {
-        if (1..4).all(|i| grid[row + i][col + i] == target[i]) {
-            count += 1;
-        }
+    if row < grid.len() - 3
+        && col < grid[row].len() - 3
+        && (1..4).all(|i| grid[row + i][col + i] == target[i])
+    {
+        count += 1;
     }
     // South-West
-    if row > 2 && col < grid[row].len() - 3 {
-        if (1..4).all(|i| grid[row - i][col + i] == target[i]) {
-            count += 1;
-        }
+    if row > 2 && col < grid[row].len() - 3 && (1..4).all(|i| grid[row - i][col + i] == target[i]) {
+        count += 1;
     }
     // North-West
-    if row > 2 && col > 2 {
-        if (1..4).all(|i| grid[row - i][col - i] == target[i]) {
-            count += 1;
-        }
+    if row > 2 && col > 2 && (1..4).all(|i| grid[row - i][col - i] == target[i]) {
+        count += 1;
     }
     // North-East
-    if row < grid.len() - 3 && col > 2 {
-        if (1..4).all(|i| grid[row + i][col - i] == target[i]) {
-            count += 1;
-        }
+    if row < grid.len() - 3 && col > 2 && (1..4).all(|i| grid[row + i][col - i] == target[i]) {
+        count += 1;
     }
-    return count;
+    count
 }
-fn find_x_mas(grid: &Vec<Vec<char>>, row: usize, col: usize) -> usize {
+fn find_x_mas(grid: &[Vec<char>], row: usize, col: usize) -> usize {
     if row < 1
         || col < 1
         || row > grid.len() - 2
@@ -108,7 +95,7 @@ fn find_x_mas(grid: &Vec<Vec<char>>, row: usize, col: usize) -> usize {
     {
         return 1;
     }
-    return 0;
+    0
 }
 #[cfg(test)]
 mod tests {
@@ -123,7 +110,7 @@ mod tests {
         assert_eq!(part_2(&example()), 9);
     }
     fn example() -> String {
-        return String::from(
+        String::from(
             "
             MMMSXXMASM
             MSAMXMSMSA
@@ -140,6 +127,6 @@ mod tests {
         )
         .lines()
         .map(|line| line.trim().to_string() + "\n")
-        .collect();
+        .collect()
     }
 }

@@ -5,7 +5,7 @@ fn main() {
     println!("Part 1: {}", part_1(&data));
     println!("Part 2: {}", part_2(&data));
 }
-fn part_1(data: &String) -> usize {
+fn part_1(data: &str) -> usize {
     let antennas = read_antennas(data);
     let bounds = Vector2D {
         row: data.lines().count() as isize,
@@ -18,13 +18,13 @@ fn part_1(data: &String) -> usize {
                 .iter()
                 .filter(|pos| in_bounds(pos, &bounds))
                 .for_each(|antinode| {
-                    antiodes.insert(antinode.clone());
+                    antiodes.insert(*antinode);
                 });
         }
     }
     antiodes.len()
 }
-fn part_2(data: &String) -> usize {
+fn part_2(data: &str) -> usize {
     let antennas = read_antennas(data);
     let bounds = Vector2D {
         row: data.lines().count() as isize,
@@ -34,7 +34,7 @@ fn part_2(data: &String) -> usize {
     for (i, a) in antennas.iter().enumerate() {
         for b in antennas.iter().skip(i + 1) {
             get_antinodes_2(a, b, &bounds).iter().for_each(|antinode| {
-                antiodes.insert(antinode.clone());
+                antiodes.insert(*antinode);
             });
         }
     }
@@ -59,11 +59,11 @@ fn get_antinodes_2(a: &Antenna, b: &Antenna, bounds: &Vector2D) -> Vec<Vector2D>
     }
     let diff = a.pos - b.pos;
     while in_bounds(&a.pos, bounds) {
-        result.push(a.pos.clone());
+        result.push(a.pos);
         a.pos = a.pos + diff;
     }
     while in_bounds(&b.pos, bounds) {
-        result.push(b.pos.clone());
+        result.push(b.pos);
         b.pos = b.pos - diff;
     }
     result
@@ -98,10 +98,10 @@ struct Antenna {
     frequency: char,
     pos: Vector2D,
 }
-fn read_antennas(data: &String) -> Vec<Antenna> {
+fn read_antennas(data: &str) -> Vec<Antenna> {
     data.lines()
         .enumerate()
-        .map(|(row, line)| {
+        .flat_map(|(row, line)| {
             line.chars()
                 .enumerate()
                 .filter(|(_, c)| *c != '.')
@@ -114,7 +114,6 @@ fn read_antennas(data: &String) -> Vec<Antenna> {
                 })
                 .collect::<Vec<_>>()
         })
-        .flatten()
         .collect()
 }
 

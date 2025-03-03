@@ -5,45 +5,45 @@ fn main() {
     println!("Part 1: {}", part_1(&data));
     println!("Part 2: {}", part_2(&data));
 }
-fn part_1(data: &String) -> usize {
+fn part_1(data: &str) -> usize {
     let (head, trail) = data.split_once("\n\n").unwrap();
-    let rules = read_rules(&head.to_string());
-    let updates = read_updates(&trail.to_string());
-    return updates
+    let rules = read_rules(head);
+    let updates = read_updates(trail);
+    updates
         .iter()
         .filter(|update| is_correct_order(update, &rules))
-        .map(get_middle)
-        .sum();
+        .map(|update| get_middle(update))
+        .sum()
 }
-fn part_2(data: &String) -> usize {
+fn part_2(data: &str) -> usize {
     let (head, trail) = data.split_once("\n\n").unwrap();
-    let rules = read_rules(&head.to_string());
-    let updates = read_updates(&trail.to_string());
-    return updates
+    let rules = read_rules(head);
+    let updates = read_updates(trail);
+    updates
         .iter()
         .filter(|update| !is_correct_order(update, &rules))
         .map(|update| fix_order(update.clone(), &rules))
         .map(|update| get_middle(&update))
-        .sum();
+        .sum()
 }
-fn read_rules(data: &String) -> Vec<(usize, usize)> {
+fn read_rules(data: &str) -> Vec<(usize, usize)> {
     let mut rules = Vec::new();
     for line in data.lines() {
         let parts: Vec<&str> = line.split('|').collect();
         let rule = (parts[0].parse().unwrap(), parts[1].parse().unwrap());
         rules.push(rule);
     }
-    return rules;
+    rules
 }
-fn read_updates(data: &String) -> Vec<Vec<usize>> {
+fn read_updates(data: &str) -> Vec<Vec<usize>> {
     let mut updates = Vec::new();
     for line in data.lines() {
         let update = line.split(',').map(|num| num.parse().unwrap()).collect();
         updates.push(update);
     }
-    return updates;
+    updates
 }
-fn is_correct_order(update: &Vec<usize>, rules: &Vec<(usize, usize)>) -> bool {
+fn is_correct_order(update: &[usize], rules: &Vec<(usize, usize)>) -> bool {
     for (before, after) in rules {
         let before_idx = update.iter().position(|x| x == before);
         let after_idx = update.iter().position(|x| x == after);
@@ -54,7 +54,7 @@ fn is_correct_order(update: &Vec<usize>, rules: &Vec<(usize, usize)>) -> bool {
             return false;
         }
     }
-    return true;
+    true
 }
 fn fix_order(update: Vec<usize>, rules: &Vec<(usize, usize)>) -> Vec<usize> {
     let mut update = update.clone();
@@ -71,10 +71,10 @@ fn fix_order(update: Vec<usize>, rules: &Vec<(usize, usize)>) -> Vec<usize> {
             }
         }
     }
-    return update;
+    update
 }
-fn get_middle(update: &Vec<usize>) -> usize {
-    return update[update.len() / 2];
+fn get_middle(update: &[usize]) -> usize {
+    update[update.len() / 2]
 }
 #[cfg(test)]
 mod tests {
@@ -89,7 +89,7 @@ mod tests {
         assert_eq!(part_2(&example()), 123);
     }
     fn example() -> String {
-        return String::from(
+        String::from(
             "
             47|53
             97|13
@@ -124,6 +124,6 @@ mod tests {
         )
         .lines()
         .map(|line| line.trim().to_string() + "\n")
-        .collect();
+        .collect()
     }
 }

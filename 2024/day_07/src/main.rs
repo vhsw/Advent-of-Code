@@ -5,23 +5,20 @@ fn main() {
     println!("Part 1: {}", part_1(&data));
     println!("Part 2: {}", part_2(&data));
 }
-fn part_1(data: &String) -> usize {
+fn part_1(data: &str) -> usize {
     let equations = read_equations(data);
     let ops = vec![add, mul];
     get_calibration_result(&equations, &ops)
 }
-fn part_2(data: &String) -> usize {
+fn part_2(data: &str) -> usize {
     let equations = read_equations(data);
     let ops = vec![add, mul, concat];
     get_calibration_result(&equations, &ops)
 }
-fn get_calibration_result(
-    equations: &Vec<Equation>,
-    ops: &Vec<fn(usize, usize) -> usize>,
-) -> usize {
+fn get_calibration_result(equations: &[Equation], ops: &Vec<fn(usize, usize) -> usize>) -> usize {
     equations
         .iter()
-        .filter(|equation| is_possible(equation, &ops))
+        .filter(|equation| is_possible(equation, ops))
         .map(|equation| equation.result)
         .sum()
 }
@@ -30,7 +27,7 @@ struct Equation {
     result: usize,
     variables: Vec<usize>,
 }
-fn read_equations(data: &String) -> Vec<Equation> {
+fn read_equations(data: &str) -> Vec<Equation> {
     data.lines()
         .map(|line| {
             let parts: Vec<&str> = line.split(':').collect();
@@ -63,7 +60,7 @@ fn is_possible(equation: &Equation, ops: &Vec<fn(usize, usize) -> usize>) -> boo
             return true;
         }
     }
-    return false;
+    false
 }
 fn add(a: usize, b: usize) -> usize {
     a + b

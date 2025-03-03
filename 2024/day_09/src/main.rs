@@ -4,53 +4,44 @@ fn main() {
     println!("Part 1: {}", part_1(&data));
     println!("Part 2: {}", part_2(&data));
 }
-fn part_1(data: &String) -> usize {
-    let mut map = read_disk_map(data);
+fn part_1(data: &str) -> usize {
+    let mut map = make_fragments_map(data);
     let steps = map.iter().filter(|x| x.is_none()).count();
     for _ in 0..steps {
-        move_block(&mut map);
+        move_fragments(&mut map);
     }
     chechsum(&map)
 }
-fn part_2(data: &String) -> usize {
-    let mut map = read_files(data);
-    let max_id = map
-        .iter()
-        .filter(|x| x.id.is_some())
-        .map(|x| x.id.unwrap())
-        .max()
-        .unwrap();
+fn part_2(data: &str) -> usize {
+    let mut map = read_blocks(data);
+    let max_id = map.iter().filter_map(|x| x.id).max().unwrap();
 
     for id in (0..max_id + 1).rev() {
         defrag(&mut map, id);
     }
     chechsum_block(&map)
 }
-fn read_disk_map(data: &String) -> Vec<Option<usize>> {
+fn make_fragments_map(data: &str) -> Vec<Option<usize>> {
     data.trim()
         .chars()
         .enumerate()
-        .map(|(i, c)| match i % 2 {
+        .flat_map(|(i, c)| match i % 2 {
             0 => vec![Some(i / 2); c.to_digit(10).unwrap() as usize],
             _ => vec![None; c.to_digit(10).unwrap() as usize],
         })
-        .flatten()
         .collect()
 }
-fn move_block(map: &mut Vec<Option<usize>>) {
+fn move_fragments(map: &mut Vec<Option<usize>>) {
     while map.last().unwrap().is_none() {
         map.pop();
     }
     let tail = map.pop().unwrap();
-    for i in 0..map.len() {
-        if map[i].is_none() {
-            map[i] = tail;
-            return;
-        }
+    match map.iter().position(|x| x.is_none()) {
+        Some(i) => map[i] = tail,
+        None => map.push(tail),
     }
-    map.push(tail);
 }
-fn chechsum(map: &Vec<Option<usize>>) -> usize {
+fn chechsum(map: &[Option<usize>]) -> usize {
     map.iter().enumerate().map(|(i, c)| i * c.unwrap()).sum()
 }
 #[derive(Clone, Debug)]
@@ -58,7 +49,7 @@ struct Block {
     id: Option<usize>,
     size: usize,
 }
-fn read_files(data: &String) -> Vec<Block> {
+fn read_blocks(data: &str) -> Vec<Block> {
     data.trim()
         .chars()
         .enumerate()
@@ -93,7 +84,7 @@ fn defrag(map: &mut Vec<Block>, id: usize) {
         }
     }
 }
-fn chechsum_block(map: &Vec<Block>) -> usize {
+fn chechsum_block(map: &[Block]) -> usize {
     let mut sum = 0;
     let mut offset = 0;
     for block in map.iter() {
