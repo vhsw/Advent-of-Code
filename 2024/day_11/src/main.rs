@@ -21,12 +21,11 @@ fn get_stones(data: &str) -> Vec<usize> {
         .collect()
 }
 fn change_stone(stone: usize, steps: usize, memory: &mut HashMap<(usize, usize), usize>) -> usize {
-    let cached = memory.get(&(stone, steps));
-    if let Some(size) = cached {
-        return *size;
-    }
     if steps == 0 {
         return 1;
+    }
+    if let Some(size) = memory.get(&(stone, steps)) {
+        return *size;
     }
     let mut size = 0;
     for stone in step(stone) {
