@@ -9,7 +9,7 @@ fn part_1(data: &str, steps: usize) -> usize {
     let mut memory = HashMap::new();
     stones
         .iter()
-        .map(|s| change_stone(*s, steps, &mut memory))
+        .map(|stone| change_stone(*stone, steps, &mut memory))
         .sum()
 }
 fn part_2(data: &str) -> usize {
