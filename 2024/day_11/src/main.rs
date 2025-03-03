@@ -1,19 +1,22 @@
 use std::{collections::HashMap, fs};
 fn main() {
     let data = fs::read_to_string("day_11/input.txt").unwrap();
-    println!("Part 1: {}", part_1(&data, 25));
+    println!("Part 1: {}", part_1(&data));
     println!("Part 2: {}", part_2(&data));
 }
-fn part_1(data: &str, steps: usize) -> usize {
+fn part_1(data: &str) -> usize {
+    expand(data, 25)
+}
+fn part_2(data: &str) -> usize {
+    expand(data, 75)
+}
+fn expand(data: &str, steps: usize) -> usize {
     let stones = get_stones(data);
     let mut memory = HashMap::new();
     stones
         .iter()
         .map(|stone| change_stone(*stone, steps, &mut memory))
         .sum()
-}
-fn part_2(data: &str) -> usize {
-    part_1(data, 75)
 }
 fn get_stones(data: &str) -> Vec<usize> {
     data.split_whitespace()
@@ -55,9 +58,9 @@ mod tests {
 
     #[test]
     fn test_part_1() {
-        assert_eq!(part_1(&example(), 1), 7);
-        assert_eq!(part_1(&larger_example(), 6), 22);
-        assert_eq!(part_1(&larger_example(), 25), 55312);
+        assert_eq!(expand(&example(), 1), 7);
+        assert_eq!(expand(&larger_example(), 6), 22);
+        assert_eq!(expand(&larger_example(), 25), 55312);
     }
     fn example() -> String {
         String::from("0 1 10 99 999")
