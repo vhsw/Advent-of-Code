@@ -121,13 +121,8 @@ mod tests {
 
     #[test]
     fn test_part_1() {
-        // assert_eq!(solve("p=2,4 v=2,-3", 5, 11, 7), 12);
         assert_eq!(solve(&example(), 100, 11, 7), 12);
     }
-    // #[test]
-    // fn test_part_2() {
-    //     assert_eq!(part_2(&example()), 80);
-    // }
     fn example() -> String {
         String::from(
             "
