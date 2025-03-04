@@ -7,11 +7,11 @@ fn main() {
 }
 
 fn part_1(data: &str) -> usize {
-    let reports = get_reports(data);
+    let reports = parse_input(data);
     reports.iter().filter(|report| is_safe(report)).count()
 }
 fn part_2(data: &str) -> usize {
-    let reports = get_reports(data);
+    let reports = parse_input(data);
     reports
         .iter()
         .filter(|report| {
@@ -25,7 +25,7 @@ fn part_2(data: &str) -> usize {
         })
         .count()
 }
-fn get_reports(data: &str) -> Vec<Vec<u32>> {
+fn parse_input(data: &str) -> Vec<Vec<u32>> {
     let mut reports = Vec::new();
     for line in data.lines() {
         reports.push(

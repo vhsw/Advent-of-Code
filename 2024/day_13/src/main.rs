@@ -7,7 +7,7 @@ fn main() {
     println!("Part 2: {}", part_2(&data));
 }
 fn part_1(data: &str) -> isize {
-    let machines = create_machines(data);
+    let machines = parse_input(data);
     machines
         .iter()
         .filter_map(try_solve_machine)
@@ -16,7 +16,7 @@ fn part_1(data: &str) -> isize {
         .sum()
 }
 fn part_2(data: &str) -> isize {
-    let mut machines = create_machines(data);
+    let mut machines = parse_input(data);
     machines.iter_mut().for_each(|m| {
         m.prize.x += 10000000000000;
         m.prize.y += 10000000000000;
@@ -38,7 +38,7 @@ struct Machine {
     btn_b: Vec2D,
     prize: Vec2D,
 }
-fn create_machines(data: &str) -> Vec<Machine> {
+fn parse_input(data: &str) -> Vec<Machine> {
     let re = Regex::new(
         r"Button A: X\+(\d+), Y\+(\d+)\nButton B: X\+(\d+), Y\+(\d+)\nPrize: X=(\d+), Y=(\d+)",
     )

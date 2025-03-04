@@ -5,20 +5,20 @@ fn main() {
     println!("Part 2: {}", part_2(&data));
 }
 fn part_1(data: &str) -> usize {
-    let map = read_map(data);
+    let map = parse_input(data);
     divide_map(&map)
         .iter()
         .map(|region| region.borders * region.plots.len())
         .sum()
 }
 fn part_2(data: &str) -> usize {
-    let map = read_map(data);
+    let map = parse_input(data);
     divide_map(&map)
         .iter()
         .map(|region| count_sides(region) * region.plots.len())
         .sum()
 }
-fn read_map(data: &str) -> Vec<Vec<char>> {
+fn parse_input(data: &str) -> Vec<Vec<char>> {
     data.lines().map(|line| line.chars().collect()).collect()
 }
 #[derive(Debug)]

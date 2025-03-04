@@ -6,9 +6,7 @@ fn main() {
     println!("Part 2: {}", part_2(&data));
 }
 fn part_1(data: &str) -> usize {
-    let (head, trail) = data.split_once("\n\n").unwrap();
-    let rules = read_rules(head);
-    let updates = read_updates(trail);
+    let (rules, updates) = parse_input(data);
     updates
         .iter()
         .filter(|update| is_correct_order(update, &rules))
@@ -16,15 +14,17 @@ fn part_1(data: &str) -> usize {
         .sum()
 }
 fn part_2(data: &str) -> usize {
-    let (head, trail) = data.split_once("\n\n").unwrap();
-    let rules = read_rules(head);
-    let updates = read_updates(trail);
+    let (rules, updates) = parse_input(data);
     updates
         .iter()
         .filter(|update| !is_correct_order(update, &rules))
         .map(|update| fix_order(update.clone(), &rules))
         .map(|update| get_middle(&update))
         .sum()
+}
+fn parse_input(data: &str) -> (Vec<(usize, usize)>, Vec<Vec<usize>>) {
+    let (head, trail) = data.split_once("\n\n").unwrap();
+    (read_rules(head), read_updates(trail))
 }
 fn read_rules(data: &str) -> Vec<(usize, usize)> {
     let mut rules = Vec::new();

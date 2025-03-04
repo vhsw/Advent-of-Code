@@ -5,20 +5,20 @@ fn main() {
     println!("Part 2: {}", part_2(&data));
 }
 fn part_1(data: &str) -> usize {
-    let map = read_map(data);
+    let map = parse_input(data);
     get_trailheads(&map)
         .iter()
         .map(|trailhead| get_score(trailhead, &map))
         .sum()
 }
 fn part_2(data: &str) -> usize {
-    let map = read_map(data);
+    let map = parse_input(data);
     get_trailheads(&map)
         .iter()
         .map(|trailhead| get_rating(trailhead, &map))
         .sum()
 }
-fn read_map(data: &str) -> Vec<Vec<u32>> {
+fn parse_input(data: &str) -> Vec<Vec<u32>> {
     data.lines()
         .map(|line| line.chars().map(|c| c.to_digit(10).unwrap()).collect())
         .collect()

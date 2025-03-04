@@ -5,7 +5,7 @@ fn main() {
     println!("Part 2: {}", part_2(&data));
 }
 fn part_1(data: &str) -> usize {
-    let mut map = make_fragments_map(data);
+    let mut map = parse_fragments(data);
     let steps = map.iter().filter(|x| x.is_none()).count();
     for _ in 0..steps {
         move_fragments(&mut map);
@@ -13,15 +13,14 @@ fn part_1(data: &str) -> usize {
     chechsum(&map)
 }
 fn part_2(data: &str) -> usize {
-    let mut map = read_blocks(data);
+    let mut map = parse_blocks(data);
     let max_id = map.iter().filter_map(|x| x.id).max().unwrap();
-
     for id in (0..max_id + 1).rev() {
         defrag(&mut map, id);
     }
     chechsum_block(&map)
 }
-fn make_fragments_map(data: &str) -> Vec<Option<usize>> {
+fn parse_fragments(data: &str) -> Vec<Option<usize>> {
     data.trim()
         .chars()
         .enumerate()
@@ -49,7 +48,7 @@ struct Block {
     id: Option<usize>,
     size: usize,
 }
-fn read_blocks(data: &str) -> Vec<Block> {
+fn parse_blocks(data: &str) -> Vec<Block> {
     data.trim()
         .chars()
         .enumerate()

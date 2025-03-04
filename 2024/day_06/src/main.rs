@@ -6,14 +6,14 @@ fn main() {
     println!("Part 2: {}", part_2(&data));
 }
 fn part_1(data: &str) -> usize {
-    let grid = make_grid(data);
+    let grid = parse_input(data);
     let pos = find_guard(&grid);
     let dir = (-1, 0);
     let path = find_path(pos, dir, &grid);
     path.len()
 }
 fn part_2(data: &str) -> usize {
-    let grid = make_grid(data);
+    let grid = parse_input(data);
     let pos = find_guard(&grid);
     let dir = (-1, 0);
     let path = find_path(pos, dir, &grid);
@@ -30,6 +30,25 @@ fn part_2(data: &str) -> usize {
         }
     }
     count
+}
+fn parse_input(data: &str) -> Vec<Vec<char>> {
+    let mut grid: Vec<Vec<char>> = Vec::new();
+    for line in data.lines() {
+        let chars = line.chars().collect();
+        grid.push(chars);
+    }
+    grid
+}
+fn find_guard(grid: &[Vec<char>]) -> (isize, isize) {
+    grid.iter()
+        .enumerate()
+        .find_map(|(i, row)| {
+            row.iter().enumerate().find_map(|(j, &c)| match c {
+                '^' => Some((i as isize, j as isize)),
+                _ => None,
+            })
+        })
+        .unwrap()
 }
 fn find_path(
     pos: (isize, isize),
@@ -80,26 +99,6 @@ fn will_stuck(pos: (isize, isize), dir: (isize, isize), grid: &[Vec<char>]) -> b
         }
         pos = new_pos;
     }
-}
-
-fn make_grid(data: &str) -> Vec<Vec<char>> {
-    let mut grid: Vec<Vec<char>> = Vec::new();
-    for line in data.lines() {
-        let chars = line.chars().collect();
-        grid.push(chars);
-    }
-    grid
-}
-fn find_guard(grid: &[Vec<char>]) -> (isize, isize) {
-    grid.iter()
-        .enumerate()
-        .find_map(|(i, row)| {
-            row.iter().enumerate().find_map(|(j, &c)| match c {
-                '^' => Some((i as isize, j as isize)),
-                _ => None,
-            })
-        })
-        .unwrap()
 }
 #[cfg(test)]
 mod tests {

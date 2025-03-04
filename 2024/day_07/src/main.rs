@@ -6,12 +6,12 @@ fn main() {
     println!("Part 2: {}", part_2(&data));
 }
 fn part_1(data: &str) -> usize {
-    let equations = read_equations(data);
+    let equations = parse_input(data);
     let ops = vec![add, mul];
     get_calibration_result(&equations, &ops)
 }
 fn part_2(data: &str) -> usize {
-    let equations = read_equations(data);
+    let equations = parse_input(data);
     let ops = vec![add, mul, concat];
     get_calibration_result(&equations, &ops)
 }
@@ -27,7 +27,7 @@ struct Equation {
     result: usize,
     variables: Vec<usize>,
 }
-fn read_equations(data: &str) -> Vec<Equation> {
+fn parse_input(data: &str) -> Vec<Equation> {
     data.lines()
         .map(|line| {
             let parts: Vec<&str> = line.split(':').collect();

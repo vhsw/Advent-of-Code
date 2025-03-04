@@ -6,11 +6,7 @@ fn main() {
     println!("Part 2: {}", part_2(&data));
 }
 fn part_1(data: &str) -> usize {
-    let antennas = read_antennas(data);
-    let bounds = Vector2D {
-        row: data.lines().count() as isize,
-        col: data.lines().next().unwrap().chars().count() as isize,
-    };
+    let (antennas, bounds) = parse_input(data);
     let mut antiodes = HashSet::new();
     for (i, a) in antennas.iter().enumerate() {
         for b in antennas.iter().skip(i + 1) {
@@ -25,11 +21,7 @@ fn part_1(data: &str) -> usize {
     antiodes.len()
 }
 fn part_2(data: &str) -> usize {
-    let antennas = read_antennas(data);
-    let bounds = Vector2D {
-        row: data.lines().count() as isize,
-        col: data.lines().next().unwrap().chars().count() as isize,
-    };
+    let (antennas, bounds) = parse_input(data);
     let mut antiodes = HashSet::new();
     for (i, a) in antennas.iter().enumerate() {
         for b in antennas.iter().skip(i + 1) {
@@ -40,17 +32,25 @@ fn part_2(data: &str) -> usize {
     }
     antiodes.len()
 }
-fn get_antinodes(a: &Antenna, b: &Antenna) -> Vec<Vector2D> {
+fn parse_input(data: &str) -> (Vec<Antenna>, Vec2D) {
+    let antennas = read_antennas(data);
+    let bounds = Vec2D {
+        row: data.lines().count() as isize,
+        col: data.lines().next().unwrap().chars().count() as isize,
+    };
+    (antennas, bounds)
+}
+fn get_antinodes(a: &Antenna, b: &Antenna) -> Vec<Vec2D> {
     if a.frequency != b.frequency {
         return vec![];
     }
     let diff = a.pos - b.pos;
     vec![a.pos + diff, b.pos - diff]
 }
-fn in_bounds(pos: &Vector2D, bounds: &Vector2D) -> bool {
+fn in_bounds(pos: &Vec2D, bounds: &Vec2D) -> bool {
     pos.row >= 0 && pos.row < bounds.row && pos.col >= 0 && pos.col < bounds.col
 }
-fn get_antinodes_2(a: &Antenna, b: &Antenna, bounds: &Vector2D) -> Vec<Vector2D> {
+fn get_antinodes_2(a: &Antenna, b: &Antenna, bounds: &Vec2D) -> Vec<Vec2D> {
     let mut result = Vec::new();
     let mut a = a.clone();
     let mut b = b.clone();
@@ -69,11 +69,11 @@ fn get_antinodes_2(a: &Antenna, b: &Antenna, bounds: &Vector2D) -> Vec<Vector2D>
     result
 }
 #[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
-struct Vector2D {
+struct Vec2D {
     row: isize,
     col: isize,
 }
-impl ops::Add for Vector2D {
+impl ops::Add for Vec2D {
     type Output = Self;
 
     fn add(self, other: Self) -> Self {
@@ -83,7 +83,7 @@ impl ops::Add for Vector2D {
         }
     }
 }
-impl ops::Sub for Vector2D {
+impl ops::Sub for Vec2D {
     type Output = Self;
 
     fn sub(self, other: Self) -> Self {
@@ -96,7 +96,7 @@ impl ops::Sub for Vector2D {
 #[derive(Clone, Debug)]
 struct Antenna {
     frequency: char,
-    pos: Vector2D,
+    pos: Vec2D,
 }
 fn read_antennas(data: &str) -> Vec<Antenna> {
     data.lines()
@@ -107,7 +107,7 @@ fn read_antennas(data: &str) -> Vec<Antenna> {
                 .filter(|(_, c)| *c != '.')
                 .map(|(col, c)| Antenna {
                     frequency: c,
-                    pos: Vector2D {
+                    pos: Vec2D {
                         row: row as isize,
                         col: col as isize,
                     },

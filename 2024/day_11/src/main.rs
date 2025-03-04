@@ -11,14 +11,14 @@ fn part_2(data: &str) -> usize {
     expand(data, 75)
 }
 fn expand(data: &str, steps: usize) -> usize {
-    let stones = get_stones(data);
+    let stones = parse_input(data);
     let mut memory = HashMap::new();
     stones
         .iter()
         .map(|stone| change_stone(*stone, steps, &mut memory))
         .sum()
 }
-fn get_stones(data: &str) -> Vec<usize> {
+fn parse_input(data: &str) -> Vec<usize> {
     data.split_whitespace()
         .map(|s| s.parse().unwrap())
         .collect()

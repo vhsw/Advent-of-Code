@@ -7,7 +7,7 @@ fn main() {
 }
 
 fn part_1(data: &str) -> u32 {
-    let (mut left, mut right) = get_lists(data);
+    let (mut left, mut right) = parse_input(data);
     left.sort();
     right.sort();
     left.iter()
@@ -16,7 +16,7 @@ fn part_1(data: &str) -> u32 {
         .sum()
 }
 fn part_2(data: &str) -> u32 {
-    let (left, right) = get_lists(data);
+    let (left, right) = parse_input(data);
     let mut counter: HashMap<u32, u32> = HashMap::new();
     for key in right.iter() {
         counter
@@ -29,7 +29,7 @@ fn part_2(data: &str) -> u32 {
         .map(|item| item * counter.get(item).unwrap_or(&0))
         .sum()
 }
-fn get_lists(data: &str) -> (Vec<u32>, Vec<u32>) {
+fn parse_input(data: &str) -> (Vec<u32>, Vec<u32>) {
     let mut left: Vec<u32> = Vec::new();
     let mut right: Vec<u32> = Vec::new();
     for line in data.lines() {

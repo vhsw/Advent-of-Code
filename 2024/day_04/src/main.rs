@@ -6,7 +6,7 @@ fn main() {
     println!("Part 2: {}", part_2(&data));
 }
 fn part_1(data: &str) -> usize {
-    let grid = make_grid(data);
+    let grid = parse_input(data);
     let mut count = 0;
     for row in 0..grid.len() {
         for col in 0..grid[row].len() {
@@ -16,7 +16,7 @@ fn part_1(data: &str) -> usize {
     count
 }
 fn part_2(data: &str) -> usize {
-    let grid = make_grid(data);
+    let grid = parse_input(data);
     let mut count = 0;
     for row in 0..grid.len() {
         for col in 0..grid[row].len() {
@@ -25,7 +25,7 @@ fn part_2(data: &str) -> usize {
     }
     count
 }
-fn make_grid(data: &str) -> Vec<Vec<char>> {
+fn parse_input(data: &str) -> Vec<Vec<char>> {
     let mut grid: Vec<Vec<char>> = Vec::new();
     for line in data.lines() {
         let chars = line.chars().collect();
