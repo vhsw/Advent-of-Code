@@ -63,8 +63,7 @@ fn astar(nodes: &HashSet<Vec2D>, src: Node, dst: Vec2D) -> isize {
     let mut heap = BinaryHeap::new();
     heap.push((Reverse(0), src));
     let mut cost_so_far = HashMap::new();
-    cost_so_far.insert(src, 0isize);
-
+    cost_so_far.insert(src, 0);
     while let Some((_, current)) = heap.pop() {
         let current_cost = *cost_so_far.get(&current).unwrap();
         if current.pos == dst {
@@ -83,7 +82,7 @@ fn astar(nodes: &HashSet<Vec2D>, src: Node, dst: Vec2D) -> isize {
             }
         }
     }
-    panic!("dst {dst:?} is unreachable")
+    unreachable!()
 }
 fn ugly_astar(nodes: &HashSet<Vec2D>, src: Node, dst: Vec2D) -> HashSet<Vec2D> {
     let mut heap = BinaryHeap::new();
@@ -95,7 +94,6 @@ fn ugly_astar(nodes: &HashSet<Vec2D>, src: Node, dst: Vec2D) -> HashSet<Vec2D> {
     let mut came_from = HashMap::new();
     came_from.insert(src, HashSet::new());
     let mut end_nodes = HashSet::new();
-
     while let Some((_, current)) = heap.pop() {
         let current_cost = *cost_so_far.get(&current).unwrap();
         if current.pos == dst {
