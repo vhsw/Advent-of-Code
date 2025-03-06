@@ -1,7 +1,7 @@
 use std::cmp::Reverse;
-use std::collections::{BinaryHeap, HashMap, VecDeque};
+use std::collections::{BinaryHeap, HashMap, HashSet, VecDeque};
+use std::fs;
 use std::ops;
-use std::{collections::HashSet, fs};
 
 fn main() {
     let data = fs::read_to_string("day_16/input.txt").unwrap();
