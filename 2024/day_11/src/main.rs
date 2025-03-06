@@ -1,4 +1,6 @@
-use std::{collections::HashMap, fs};
+use std::collections::HashMap;
+use std::fs;
+
 fn main() {
     let data = fs::read_to_string("day_11/input.txt").unwrap();
     println!("Part 1: {}", part_1(&data));

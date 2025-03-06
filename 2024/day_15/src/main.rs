@@ -1,5 +1,6 @@
+use std::collections::HashSet;
+use std::fs;
 use std::ops;
-use std::{collections::HashSet, fs};
 
 fn main() {
     let data = fs::read_to_string("day_15/input.txt").unwrap();

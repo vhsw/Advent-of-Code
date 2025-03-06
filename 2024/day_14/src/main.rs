@@ -1,5 +1,6 @@
 use regex::Regex;
-use std::{collections::HashSet, fs};
+use std::collections::HashSet;
+use std::fs;
 
 fn main() {
     let data = fs::read_to_string("day_14/input.txt").unwrap();

@@ -1,4 +1,6 @@
-use std::{collections::HashSet, fs};
+use std::collections::HashSet;
+use std::fs;
+
 fn main() {
     let data = fs::read_to_string("day_12/input.txt").unwrap();
     println!("Part 1: {}", part_1(&data));
