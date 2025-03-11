@@ -118,7 +118,7 @@ fn directional_keypad() -> Keypad {
 }
 type Moves = HashMap<(char, char), Vec<String>>;
 static NUMPAD: LazyLock<Moves> = LazyLock::new(|| precalc_best_pathes(&numeric_keypad()));
-static DPAD: LazyLock<Moves> = LazyLock::new(|| precalc_best_pathes(&&directional_keypad()));
+static DPAD: LazyLock<Moves> = LazyLock::new(|| precalc_best_pathes(&directional_keypad()));
 fn precalc_best_pathes(keypad: &Keypad) -> HashMap<(char, char), Vec<String>> {
     let mut hm = HashMap::new();
     keypad.keys().for_each(|src| {
