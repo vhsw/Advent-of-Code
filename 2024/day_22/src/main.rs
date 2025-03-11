@@ -4,7 +4,7 @@ use std::fs;
 fn main() {
     let data = fs::read_to_string("day_22/input.txt").unwrap();
     println!("Part 1: {}", part_1(&data));
-    println!("Part 2: {}", part_2(&data)); // > 2395
+    println!("Part 2: {}", part_2(&data));
 }
 fn part_1(data: &str) -> usize {
     parse_input(data)
