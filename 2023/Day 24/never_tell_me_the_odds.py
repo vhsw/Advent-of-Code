@@ -21,7 +21,29 @@ def part1(data: str, bounds=(200000000000000, 400000000000000)):
 
 def part2(data: str):
     """Part 2 solution"""
-    return
+    hailstones = parse_input(data)
+    position_0 = hailstones[0].pos
+    velocity_0 = hailstones[0].vel
+    position_1 = hailstones[1].pos
+    velocity_1 = hailstones[1].vel
+    position_2 = hailstones[2].pos
+    velocity_2 = hailstones[2].vel
+
+    # https://www.reddit.com/r/adventofcode/comments/18pnycy/comment/kxqjg33/
+    # Stones 1 and 2, relative to stone 0:
+    p1 = position_1 - position_0
+    v1 = velocity_1 - velocity_0
+    p2 = position_2 - position_0
+    v2 = velocity_2 - velocity_0
+    # t1 = -((p1 x p2) * v2) / ((v1 x p2) * v2)
+    t1 = -int(p1.cross(p2).dot(v2) / v1.cross(p2).dot(v2))
+    # t2 = -((p1 x p2) * v1) / ((p1 x v2) * v1)
+    t2 = -int(p1.cross(p2).dot(v1) / p1.cross(v2).dot(v1))
+    c1 = position_1 + velocity_1 * t1
+    c2 = position_2 + velocity_2 * t2
+    v = (c2 - c1) / (t2 - t1)
+    p = c1 - v * t1
+    return int(p.x + p.y + p.z)
 
 
 def parse_input(data: str):
