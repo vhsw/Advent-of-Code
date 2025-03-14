@@ -35,7 +35,6 @@ fn part_2(data: &str) -> String {
             gate,
         );
     }
-
     let mut carry_in = lookup
         .get(&("x00".to_string(), "y00".to_string(), Op::And))
         .unwrap()
@@ -55,28 +54,28 @@ fn check_full_adder(bit: usize, carry_in: String, lookup: &HashMap<Key, &Gate>) 
     // println!("end");
     let xor_1 = lookup
         .get(&key(a.clone(), b.clone(), Op::Xor))
-        .unwrap_or_else(|| panic!("cannot find {a} {:?} {b}", Op::Xor))
+        .unwrap_or_else(|| panic!("Missing gate: {a} {:?} {b}", Op::Xor))
         .output
         .clone();
     let xor_2 = lookup
         .get(&key(xor_1.clone(), carry_in.clone(), Op::Xor))
-        .unwrap_or_else(|| panic!("cannot find {xor_1} {:?} {carry_in}", Op::Xor))
+        .unwrap_or_else(|| panic!("Missing gate: {xor_1} {:?} {carry_in}", Op::Xor))
         .output
         .clone();
     assert_eq!(xor_2, s);
     let and_1 = lookup
         .get(&key(a.clone(), b.clone(), Op::And))
-        .unwrap_or_else(|| panic!("cannot find {a} {:?} {b}", Op::And))
+        .unwrap_or_else(|| panic!("Missing gate: {a} {:?} {b}", Op::And))
         .output
         .clone();
     let and_2 = lookup
         .get(&key(xor_1.clone(), carry_in.clone(), Op::And))
-        .unwrap_or_else(|| panic!("cannot find {xor_1} {:?} {carry_in}", Op::And))
+        .unwrap_or_else(|| panic!("Missing gate: {xor_1} {:?} {carry_in}", Op::And))
         .output
         .clone();
     let or = lookup
         .get(&key(and_1.clone(), and_2.clone(), Op::Or))
-        .unwrap_or_else(|| panic!("cannot find {and_1} {:?} {and_2}", Op::Or))
+        .unwrap_or_else(|| panic!("Missing gate: {and_1} {:?} {and_2}", Op::Or))
         .output
         .clone();
     or
