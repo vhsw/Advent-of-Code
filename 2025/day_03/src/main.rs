@@ -6,7 +6,7 @@ fn main() {
     println!("Part 2: {}", part_2(&data));
 }
 fn part_1(data: &str) -> u64 {
-    parse_input(data).iter().map(max_2).sum()
+    parse_input(data).iter().map(|bank| max(bank, 2)).sum()
 }
 fn part_2(data: &str) -> u64 {
     parse_input(data).iter().map(|bank| max(bank, 12)).sum()
@@ -26,12 +26,6 @@ fn max(bank: &[u64], n_digits: u32) -> u64 {
     let max_index = bank.iter().position(|x| x == max_value).unwrap();
     let tail = &bank[max_index + 1..];
     max_value * 10_u64.pow(n_digits - 1) + max(tail, n_digits - 1)
-}
-fn max_2(bank: &Vec<u64>) -> u64 {
-    let max = bank.iter().take(bank.len() - 1).max().unwrap();
-    let max_index = bank.iter().position(|x| x == max).unwrap();
-    let max_after_max = bank.iter().skip(max_index + 1).max().unwrap();
-    max * 10 + max_after_max
 }
 fn parse_input(data: &str) -> Vec<Vec<u64>> {
     let mut result = Vec::new();
