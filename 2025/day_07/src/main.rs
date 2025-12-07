@@ -14,7 +14,7 @@ fn part_1(data: &str) -> usize {
     beams.insert(src);
     let mut splits = 0;
     for _ in 0..size {
-        let mut new_beams: HashSet<(i32, i32)> = HashSet::new();
+        let mut new_beams = HashSet::new();
         for beam in &beams {
             let new_beam = (beam.0 + 1, beam.1);
             if grid.contains(&new_beam) {
